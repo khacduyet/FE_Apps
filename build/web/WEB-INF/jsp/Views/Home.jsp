@@ -14,37 +14,19 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <div>
-            <a href="addClass.htm">INSERT</a>
+        <div class="toast-container" style="position: absolute; bottom: 100px; right: 10px;">
+            <!-- Then put toasts within -->
+            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-toggle="toast">
+                <div class="toast-header">
+                    <img src="<c:url value="/resources/assets/images/logo-sm.png" />" alt="brand-logo" height="12" class="me-1" />
+                    <strong class="me-auto">Adminto</strong>
+                    <small class="text-muted">just now</small>
+                    <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    See? Just like this.
+                </div>
+            </div> <!--end toast-->
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Class Name</th>
-                    <th scope="col">Note</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">School Year</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${data}" var="c" varStatus="loop">
-                    <tr>
-                        <th scope="row">${loop.count}</th>
-                        <td>${c.className}</td>
-                        <td>${c.note}</td>
-                        <td>${c.course}</td>
-                        <td>${c.schoolYear}</td>
-                        <td>${c.status}</td>
-                        <td>
-                            <a href="editClass.htm">EDIT</a>
-                            <a href="deleteClass.htm">DELETE</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
     </body>
 </html>
