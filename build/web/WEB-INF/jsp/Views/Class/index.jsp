@@ -47,7 +47,7 @@
                                         <td>${c.status}</td>
                                         <td class="text-center">
                                         <a href="/FE_ExamApplication/class/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="/FE_ExamApplication/class/delete.htm?id=${c.id}" class="btn btn-danger"> Delete </a>
+                                        <a href="/FE_ExamApplication/class/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
                                     </td>
                                     </tr>
                                 </c:forEach>

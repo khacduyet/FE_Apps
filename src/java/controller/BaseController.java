@@ -26,7 +26,14 @@ public class BaseController {
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String viewLogin(Model model) {
+    public String viewLogin(Model model, HttpServletResponse res, HttpServletRequest req) {
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                res.addCookie(cookie);
+            }
+        }
         Users user = new Users();
         model.addAttribute("user", user);
         return "Login";

@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="header-title">Input information class</h3>
+                <h3 class="header-title">Input information user</h3>
 
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -21,33 +21,36 @@
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Class Name</label>
-                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
+                                <label class="form-label">Name</label>
+                                <f:input path="name" type="text"  cssClass="form-control" placeholder="Name" />
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Course</label>
-                                <f:input path="course" type="text"  cssClass="form-control" placeholder="Course" />
+                                <label class="form-label">Email</label>
+                                <f:input path="email" type="text"  cssClass="form-control" placeholder="Email" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">School year</label>
-                                <f:input path="schoolYear" type="text"  cssClass="form-control" placeholder="School year" />
+                                <label class="form-label">Age</label>
+                                <f:input path="age" type="text"  cssClass="form-control" placeholder="Age" />
                             </div>
-
                             <div class="mb-3">
-                                <label for="note" class="form-label">Note</label>
-                                <f:textarea path="note" cssClass="form-control" id="example-textarea" rows="5" />
+                                <label class="form-label">Village</label>
+                                <f:input path="village" type="text"  cssClass="form-control" placeholder="Village" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date of birth</label>
+                                <input name="dob" type="date" value="${dob}" Class="form-control" placeholder="Date of birth" />
                             </div>
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <f:checkbox path="status" cssClass="form-check-input" />
-                                    <label class="form-check-label" for="customCheck1">Status (Show/Hiden)</label>
+                                    <f:checkbox path="isActive" cssClass="form-check-input" />
+                                    <label class="form-check-label" for="customCheck1">Active (Lock/Unlock)</label>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/class.htm" class="btn btn-danger">Back</a>
+                                <a href="/user.htm" class="btn btn-danger">Back</a>
                             </div>
                         </f:form>
                     </div> <!-- end col -->

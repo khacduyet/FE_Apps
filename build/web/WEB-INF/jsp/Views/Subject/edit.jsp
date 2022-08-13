@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="header-title">Input information class</h3>
+                <h3 class="header-title">Input information subject</h3>
 
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -21,17 +21,8 @@
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Class Name</label>
-                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Course</label>
-                                <f:input path="course" type="text"  cssClass="form-control" placeholder="Course" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">School year</label>
-                                <f:input path="schoolYear" type="text"  cssClass="form-control" placeholder="School year" />
+                                <label class="form-label">Name</label>
+                                <f:input path="name" type="text"  cssClass="form-control" placeholder="Name" />
                             </div>
 
                             <div class="mb-3">
@@ -47,7 +38,7 @@
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/class.htm" class="btn btn-danger">Back</a>
+                                <a href="/subject.htm" class="btn btn-danger">Back</a>
                             </div>
                         </f:form>
                     </div> <!-- end col -->

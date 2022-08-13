@@ -23,9 +23,6 @@ public class CommonController {
                 }
             }
         }
-        if (auth.isEmpty()) {
-            return "redirect:login.htm";
-        }
         return auth;
     }
 }
