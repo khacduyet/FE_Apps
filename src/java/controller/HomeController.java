@@ -34,19 +34,9 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req) {
         String auth = CheckLogin(req);
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", auth);
-//        HttpEntity<String> entity = new HttpEntity<String>(headers);
-//
-//        String Url = baseUrl + "class";
-//        RestTemplate rt = new RestTemplate();
-//        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
-//        String data = response.getBody();
-//
-//        Gson g = new Gson();
-//        ReturnMessage c = g.fromJson(data, ReturnMessage.class);
-//        List<Class> cla = (List<Class>) c.data;
-//        m.addAttribute("data", cla);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
         m.addAttribute("VIEW", "Views/Home.jsp");
         return "MainPages";
     }

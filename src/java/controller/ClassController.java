@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import static controller.CommonController.CheckLogin;
 import entities.ReturnMessage;
 import java.util.List;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import entities.Class;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import java.nio.charset.StandardCharsets;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -36,15 +37,19 @@ public class ClassController {
     String contentType = "text/html; charset=UTF-8";
 
     @RequestMapping(value = "/class", method = RequestMethod.GET)
-    public String Index(Model m, HttpServletRequest req) {
+    public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
-        headers.set("Content-Type", contentType);
+        headers.set("Content-Type", "application/json; charset=UTF-8");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
         String Url = baseUrl + "class";
         RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
         String data = response.getBody();
 
@@ -53,12 +58,18 @@ public class ClassController {
         List<entities.Class> cla = (List<entities.Class>) c.data;
         m.addAttribute("data", cla);
 
+        String msg = (String) m.asMap().get("msg");
+        m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Class/index.jsp");
         return "MainPages";
     }
 
     @RequestMapping(value = "/class/initInsert", method = RequestMethod.GET)
-    public String getForm(Model m) {
+    public String getForm(Model m, HttpServletRequest req) {
+        String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
         Class cla = new Class();
         m.addAttribute("VIEW", "Views/Class/add.jsp");
         m.addAttribute("c", cla);
@@ -66,28 +77,32 @@ public class ClassController {
     }
 
     @RequestMapping(value = "/class/insert", method = RequestMethod.POST)
-    public String getForm(Model m, Class c, HttpServletRequest req) {
+    public String postForm(Model m, Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
         headers.set("Content-Type", "application/json; charset=UTF-8");
+        headers.set("Accept", "application/json");
         Gson g = new Gson();
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);
 
         String Url = baseUrl + "class";
         RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         String data = rt.postForObject(Url, entity, String.class);
 
         ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
         String msg = rmsg.message;
-        m.addAttribute("data", msg);
-//        m.addAttribute("VIEW", "Views/Class/index.jsp");
-        return "redirect:class.htm";
+        redirectAttrs.addFlashAttribute("msg", msg);
+        return "redirect:/class.htm";
     }
 
-    @RequestMapping(value = "class/initEdit", method = RequestMethod.GET)
-    public String getForm(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
+    @RequestMapping(value = "/class/initEdit", method = RequestMethod.GET)
+    public String getedForm(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
         String auth = CheckLogin(req);
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
@@ -96,16 +111,65 @@ public class ClassController {
 
         String Url = baseUrl + "class/" + id;
         RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
         String data = response.getBody();
 
         Gson g = new Gson();
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
-        String json = g.toJson(c.data); // May not serialize foo.value correctly
+        String json = g.toJson(c.data);
         Class cla = new Class();
         cla = g.fromJson(json, cla.getClass());
         m.addAttribute("c", cla);
         m.addAttribute("VIEW", "Views/Class/edit.jsp");
         return "MainPages";
+    }
+
+    @RequestMapping(value = "/class/edit", method = RequestMethod.POST)
+    public String postedForm(Model m, Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+        String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "application/json; charset=UTF-8");
+        headers.set("Accept", "application/json");
+        Gson g = new Gson();
+        String e = g.toJson(c);
+        HttpEntity<String> entity = new HttpEntity<String>(e, headers);
+
+        String Url = baseUrl + "class";
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        String data = rt.postForObject(Url, entity, String.class);
+
+        ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
+        String msg = rmsg.message;
+        redirectAttrs.addFlashAttribute("msg", msg);
+        return "redirect:/class.htm";
+    }
+
+    @RequestMapping(value = "/class/remove", method = RequestMethod.GET)
+    public String remove(Model m, @RequestParam(value = "id") String id, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+        String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "text/plain; charset=UTF-8");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        String Url = baseUrl + "class/" + id;
+        RestTemplate rt = new RestTemplate();
+        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.DELETE, entity, String.class);
+        String data = response.getBody();
+
+        Gson g = new Gson();
+        ReturnMessage c = g.fromJson(data, ReturnMessage.class);
+        String msg = c.message;
+        redirectAttrs.addFlashAttribute("msg", msg);
+        return "redirect:/class.htm";
     }
 }

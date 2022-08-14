@@ -16,17 +16,8 @@
         <h1>Hello World!</h1>
         <div class="toast-container" style="position: absolute; bottom: 100px; right: 10px;">
             <!-- Then put toasts within -->
-            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-toggle="toast">
-                <div class="toast-header">
-                    <img src="<c:url value="/resources/assets/images/logo-sm.png" />" alt="brand-logo" height="12" class="me-1" />
-                    <strong class="me-auto">Adminto</strong>
-                    <small class="text-muted">just now</small>
-                    <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    See? Just like this.
-                </div>
-            </div> <!--end toast-->
+
+            
         </div>
     </body>
 </html>

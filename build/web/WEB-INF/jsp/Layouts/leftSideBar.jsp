@@ -78,16 +78,36 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
-                    <a href="class.htm">
+                    <a href="/FE_ExamApplication/class.htm">
                         <i class="mdi mdi-calendar-blank-outline"></i>
                         <span> Class </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="apps-chat.html">
+                    <a href="/FE_ExamApplication/user.htm">
                         <i class="mdi mdi-forum-outline"></i>
-                        <span> Chat </span>
+                        <span> User </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/FE_ExamApplication/subject.htm">
+                        <i class="mdi mdi-cog"></i>
+                        <span> Subject </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/FE_ExamApplication/level-point.htm">
+                        <i class="mdi mdi-cog"></i>
+                        <span> Level point </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/FE_ExamApplication/question.htm">
+                        <i class="mdi mdi-cog"></i>
+                        <span> Question </span>
                     </a>
                 </li>
 
