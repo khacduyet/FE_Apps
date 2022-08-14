@@ -31,7 +31,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Age</label>
-                                <f:input path="age" type="text"  cssClass="form-control" placeholder="Age" />
+                                <f:input path="age" type="number"  cssClass="form-control" placeholder="Age" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Village</label>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/user.htm" class="btn btn-danger">Back</a>
+                                <a href="/FE_ExamApplication/user.htm" class="btn btn-danger">Back</a>
                             </div>
                         </f:form>
                     </div> <!-- end col -->

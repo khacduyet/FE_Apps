@@ -97,6 +97,19 @@
                         <span> Subject </span>
                     </a>
                 </li>
+                <li>
+                    <a href="/FE_ExamApplication/level-point.htm">
+                        <i class="mdi mdi-cog"></i>
+                        <span> Level point </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/FE_ExamApplication/question.htm">
+                        <i class="mdi mdi-cog"></i>
+                        <span> Question </span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="#email" data-bs-toggle="collapse">

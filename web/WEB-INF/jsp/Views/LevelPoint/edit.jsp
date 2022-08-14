@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="header-title">Input information subject</h3>
+                <h3 class="header-title">Input information level point</h3>
 
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -26,8 +26,12 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="note" class="form-label">Note</label>
-                                <f:textarea path="note" cssClass="form-control" id="example-textarea" rows="5" />
+                                <label class="form-label">Point</label>
+                                <f:input path="point" type="number" step="0.5" cssClass="form-control" placeholder="Point" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Note</label>
+                                <f:input path="note" type="text"  cssClass="form-control" placeholder="Note" />
                             </div>
 
                             <div class="mb-3">
@@ -38,7 +42,7 @@
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/FE_ExamApplication/subject.htm" class="btn btn-danger">Back</a>
+                                <a href="/FE_ExamApplication/level-point.htm" class="btn btn-danger">Back</a>
                             </div>
                         </f:form>
                     </div> <!-- end col -->

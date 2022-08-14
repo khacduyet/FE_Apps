@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Default Example</h4>
                         <p class="text-muted font-14 mb-3">
-                            <a href="/FE_ExamApplication/subject/initInsert.htm" class="btn btn-primary">Add New Record</a>
+                            <a href="subject/initInsert.htm" class="btn btn-primary">Add New Record</a>
                         </p>
 
                         <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
@@ -42,8 +42,8 @@
                                         <td>${c.note}</td>
                                         <td>${c.status}</td>
                                         <td class="text-center">
-                                        <a href="/FE_ExamApplication/subject/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="/FE_ExamApplication/subject/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                        <a href="subject/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
+                                        <a href="subject/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
                                     </td>
                                     </tr>
                                 </c:forEach>
