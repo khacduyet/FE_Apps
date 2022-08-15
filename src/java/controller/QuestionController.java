@@ -20,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import entities.Class;
+import entities.LevelPoint;
 import entities.Question;
+import entities.QuestionItem;
+import entities.Subject;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,6 +75,29 @@ public class QuestionController {
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
         }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "application/json; charset=UTF-8");
+        headers.set("Accept", "application/json");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        String UrlSubject = baseUrl + "subject";
+        String UrlLevel = baseUrl + "level-point";
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        ResponseEntity<String> responseSubject = rt.exchange(UrlSubject, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseLevel = rt.exchange(UrlLevel, HttpMethod.GET, entity, String.class);
+        String dataSubject = responseSubject.getBody();
+        String dataLevel = responseLevel.getBody();
+
+        Gson g = new Gson();
+        ReturnMessage sub = g.fromJson(dataSubject, ReturnMessage.class);
+        ReturnMessage level = g.fromJson(dataLevel, ReturnMessage.class);
+        List<Subject> subjects = (List<Subject>) sub.data;
+        List<LevelPoint> levels = (List<LevelPoint>) level.data;
+        m.addAttribute("subjects", subjects);
+        m.addAttribute("levels", levels);
+
         Question cla = new Question();
         m.addAttribute("VIEW", "Views/Question/add.jsp");
         m.addAttribute("c", cla);
@@ -78,7 +105,7 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/question/insert", method = RequestMethod.POST)
-    public String postForm(Model m, Question c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+    public String postForm(Model m, Question c, String[] answer, int[] isTrue, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
@@ -87,6 +114,21 @@ public class QuestionController {
         headers.set("authorization", auth);
         headers.set("Content-Type", "application/json; charset=UTF-8");
         headers.set("Accept", "application/json");
+        List<QuestionItem> qis = new ArrayList<>();
+        int count = 0;
+        for (String a : answer) {
+            QuestionItem qi = new QuestionItem();
+            qi.setNote(a);
+            qi.setName(count + "");
+            if (count == isTrue[0]) {
+                qi.setIsTrue(Boolean.TRUE);
+            } else {
+                qi.setIsTrue(Boolean.FALSE);
+            }
+            qis.add(qi);
+            count++;
+        }
+        c.setItems(qis);
         Gson g = new Gson();
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);
@@ -108,26 +150,53 @@ public class QuestionController {
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
         headers.set("Content-Type", "text/plain; charset=UTF-8");
+        headers.set("Accept", "application/json");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
         String Url = baseUrl + "question/" + id;
+        String UrlSubject = baseUrl + "subject";
+        String UrlLevel = baseUrl + "level-point";
+
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseSubject = rt.exchange(UrlSubject, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseLevel = rt.exchange(UrlLevel, HttpMethod.GET, entity, String.class);
         String data = response.getBody();
+        String dataSubject = responseSubject.getBody();
+        String dataLevel = responseLevel.getBody();
 
         Gson g = new Gson();
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
+        ReturnMessage sub = g.fromJson(dataSubject, ReturnMessage.class);
+        ReturnMessage level = g.fromJson(dataLevel, ReturnMessage.class);
+        List<Subject> subjects = (List<Subject>) sub.data;
+        List<LevelPoint> levels = (List<LevelPoint>) level.data;
+
+        m.addAttribute("subjects", subjects);
+        m.addAttribute("levels", levels);
+
         String json = g.toJson(c.data);
         Question cla = new Question();
         cla = g.fromJson(json, cla.getClass());
-        m.addAttribute("c", cla);
+        
+        QuestionItem pos0 = cla.Items.get(0);
+        QuestionItem pos1 = cla.Items.get(1);
+        QuestionItem pos2 = cla.Items.get(2);
+        QuestionItem pos3 = cla.Items.get(3);
+
         m.addAttribute("VIEW", "Views/Question/edit.jsp");
+        m.addAttribute("c", cla);
+        m.addAttribute("pos0", pos0);
+        m.addAttribute("pos1", pos1);
+        m.addAttribute("pos2", pos2);
+        m.addAttribute("pos3", pos3);
         return "MainPages";
     }
 
     @RequestMapping(value = "/question/edit", method = RequestMethod.POST)
-    public String postedForm(Model m, Question c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+    public String postedForm(Model m, Question c, String[] answer, int[] isTrue, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
@@ -136,6 +205,23 @@ public class QuestionController {
         headers.set("authorization", auth);
         headers.set("Content-Type", "application/json; charset=UTF-8");
         headers.set("Accept", "application/json");
+        
+        List<QuestionItem> qis = new ArrayList<>();
+        int count = 0;
+        for (String a : answer) {
+            QuestionItem qi = new QuestionItem();
+            qi.setNote(a);
+            qi.setName(count + "");
+            if (count == isTrue[0]) {
+                qi.setIsTrue(Boolean.TRUE);
+            } else {
+                qi.setIsTrue(Boolean.FALSE);
+            }
+            qis.add(qi);
+            count++;
+        }
+        c.setItems(qis);
+        
         Gson g = new Gson();
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);
