@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Report</h4>
+                        <h4 class="mt-0 header-title">Default Example</h4>
                         <p class="text-muted font-14 mb-3">
                             <a href="class/initInsert.htm" class="btn btn-primary">Add New Record</a>
                         </p>

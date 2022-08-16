@@ -110,6 +110,12 @@
                         <span> Question </span>
                     </a>
                 </li>
+                   <li>
+                    <a href="/FE_ExamApplication/report.htm">
+                        <i class="mdi mdi-cog"></i>
+                        <span> Report </span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="#email" data-bs-toggle="collapse">
