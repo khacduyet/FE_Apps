@@ -32,7 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ReportController {
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
-    @RequestMapping(value = "/report.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/report", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
@@ -60,19 +60,19 @@ public class ReportController {
         return "MainPages";
     }
 
-    @RequestMapping(value = "/class/initInsert", method = RequestMethod.GET)
+    @RequestMapping(value = "/report/initInsert", method = RequestMethod.GET)
     public String getForm(Model m, HttpServletRequest req) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
         }
         entities.Class cla = new entities.Class();
-        m.addAttribute("VIEW", "Views/Class/add.jsp");
+        m.addAttribute("VIEW", "Views/Report/add.jsp");
         m.addAttribute("c", cla);
         return "MainPages";
     }
 
-    @RequestMapping(value = "/class/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/report/insert", method = RequestMethod.POST)
     public String postForm(Model m, entities.Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
@@ -86,7 +86,7 @@ public class ReportController {
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);
 
-        String Url = baseUrl + "class";
+        String Url = baseUrl + "report";
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         String data = rt.postForObject(Url, entity, String.class);
@@ -94,10 +94,10 @@ public class ReportController {
         ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
         String msg = rmsg.message;
         redirectAttrs.addFlashAttribute("msg", msg);
-        return "redirect:/class.htm";
+        return "redirect:/report.htm";
     }
 
-    @RequestMapping(value = "/class/initEdit", method = RequestMethod.GET)
+    @RequestMapping(value = "/report/initEdit", method = RequestMethod.GET)
     public String getedForm(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
         String auth = CheckLogin(req);
         HttpHeaders headers = new HttpHeaders();
@@ -105,7 +105,7 @@ public class ReportController {
         headers.set("Content-Type", "text/plain; charset=UTF-8");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        String Url = baseUrl + "class/" + id;
+        String Url = baseUrl + "report/" + id;
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
@@ -121,7 +121,7 @@ public class ReportController {
         return "MainPages";
     }
 
-    @RequestMapping(value = "/class/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/report/edit", method = RequestMethod.POST)
     public String postedForm(Model m, entities.Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
@@ -135,7 +135,7 @@ public class ReportController {
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);
 
-        String Url = baseUrl + "class";
+        String Url = baseUrl + "report";
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         String data = rt.postForObject(Url, entity, String.class);  
@@ -143,10 +143,10 @@ public class ReportController {
         ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
         String msg = rmsg.message;
         redirectAttrs.addFlashAttribute("msg", msg);
-        return "redirect:/class.htm";
+        return "redirect:/report.htm";
     }
 
-    @RequestMapping(value = "/class/remove", method = RequestMethod.GET)
+    @RequestMapping(value = "/report/remove", method = RequestMethod.GET)
     public String remove(Model m, @RequestParam(value = "id") String id, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
@@ -157,7 +157,7 @@ public class ReportController {
         headers.set("Content-Type", "text/plain; charset=UTF-8");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        String Url = baseUrl + "class/" + id;
+        String Url = baseUrl + "report/" + id;
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.DELETE, entity, String.class);
         String data = response.getBody();
@@ -166,6 +166,6 @@ public class ReportController {
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
         String msg = c.message;
         redirectAttrs.addFlashAttribute("msg", msg);
-        return "redirect:/class.htm";
+        return "redirect:/report.htm";
     }
 }
