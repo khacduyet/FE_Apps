@@ -128,6 +128,12 @@
                     <span> Contest </span>
                 </a>
             </li>
+            <li>
+                <a href="/FE_ExamApplication/examstudent.htm">
+                    <i class="mdi mdi-cog"></i>
+                    <span> Exam Student </span>
+                </a>
+            </li>
 
             <li>
                 <a href="#email" data-bs-toggle="collapse">
