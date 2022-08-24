@@ -12,8 +12,33 @@ package entities;
 public class Report {
     private String id;
     public String idUser;
-    public String Content;
-    public String Status;
+    public String nameUser;
+    public String emailUser;
+    public String content;
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+    public Boolean status;
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;
@@ -32,20 +57,11 @@ public class Report {
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
-    public void setContent(String Content) {
-        this.Content = Content;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String Status) {
-        this.Status = Status;
-    }
-    
-    
 }

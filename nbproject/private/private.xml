@@ -3,20 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/controller/BaseController.java</file>
-            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/controller/ClassController.java</file>
-            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/web/WEB-INF/jsp/Views/Class/index.jsp</file>
-            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/web/WEB-INF/jsp/Layouts/leftSideBar.jsp</file>
             <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/controller/ReportController.java</file>
-=======
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Login.jsp</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/QuestionController.java</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/entities/Question.java</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/BaseController.java</file>
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/Question/edit.jsp</file>
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/Question/add.jsp</file>
->>>>>>> 1c345c099a4b27b20dcbab33baf5423e8aea2f77
         </group>
     </open-files>
 </project-private>

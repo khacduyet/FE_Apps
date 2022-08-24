@@ -17,37 +17,30 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Default Example</h4>
-                        <p class="text-muted font-14 mb-3">
-                            <a href="class/initInsert.htm" class="btn btn-primary">Add New Record</a>
-                        </p>
+                        <h4 class="mt-0 header-title">Report Data Table</h4>
 
                         <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col">#</th>
-                                    <th scope="col">Class Name</th>
-                                    <th scope="col">Note</th>
-                                    <th scope="col">Course</th>
-                                    <th scope="col">School Year</th>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Content</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Handle</th>  
                                 </tr>
                             </thead>
-
 
                             <tbody>
                                 <c:forEach items="${data}" var="c" varStatus="loop">
                                     <tr class="text-center">
                                         <th scope="row">${loop.count}</th>
-                                        <td>${c.className}</td>
-                                        <td>${c.note}</td>
-                                        <td>${c.course}</td>
-                                        <td>${c.schoolYear}</td>
+                                        <td>${c.nameUser}</td>
+                                        <td>${c.emailUser}</td>
+                                        <td>${c.content}</td>
                                         <td>${c.status}</td>
                                         <td class="text-center">
-                                        <a href="class/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="class/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                        <a href="report/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> View Details </a>
                                     </td>
                                     </tr>
                                 </c:forEach>

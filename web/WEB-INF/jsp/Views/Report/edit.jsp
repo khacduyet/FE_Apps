@@ -21,33 +21,12 @@
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Class Name</label>
-                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Course</label>
-                                <f:input path="course" type="text"  cssClass="form-control" placeholder="Course" />
+                                <label for="note" class="form-label">Content Report</label>
+                                 <f:textarea path="content" cssClass="form-control" id="example-textarea" rows="5" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">School year</label>
-                                <f:input path="schoolYear" type="text"  cssClass="form-control" placeholder="School year" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="note" class="form-label">Note</label>
-                                <f:textarea path="note" cssClass="form-control" id="example-textarea" rows="5" />
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <f:checkbox path="status" cssClass="form-check-input" />
-                                    <label class="form-check-label" for="customCheck1">Status (Show/Hiden)</label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/FE_ExamApplication/class.htm" class="btn btn-danger">Back</a>
+                                <button type="submit" class="btn btn-success">Processed</button>
+                                <a href="/FE_ExamApplication/report.htm" class="btn btn-danger">Back</a>
                             </div>
                         </f:form>
                     </div> <!-- end col -->

@@ -7,6 +7,7 @@ package controller;
 
 import com.google.gson.Gson;
 import static controller.CommonController.CheckLogin;
+import entities.Report;
 import entities.ReturnMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -51,8 +52,8 @@ public class ReportController {
 
         Gson g = new Gson();
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
-        List<entities.Class> cla = (List<entities.Class>) c.data;
-        m.addAttribute("data", cla);
+        List<Report> report = (List<Report>) c.data;
+        m.addAttribute("data", report);
 
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
@@ -114,15 +115,15 @@ public class ReportController {
         Gson g = new Gson();
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
         String json = g.toJson(c.data);
-        entities.Class cla = new entities.Class();
+        Report cla = new Report();
         cla = g.fromJson(json, cla.getClass());
         m.addAttribute("c", cla);
-        m.addAttribute("VIEW", "Views/Class/edit.jsp");
+        m.addAttribute("VIEW", "Views/Report/edit.jsp");
         return "MainPages";
     }
 
     @RequestMapping(value = "/report/edit", method = RequestMethod.POST)
-    public String postedForm(Model m, entities.Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+    public String postedForm(Model m, entities.Report c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
