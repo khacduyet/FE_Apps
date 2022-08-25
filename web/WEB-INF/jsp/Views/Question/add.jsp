@@ -44,7 +44,7 @@
                             <c:forEach items="${levels}" var="level">
                                 <div class="mb-3">
                                     <input type="radio" id="idLevel" name="idLevel" value="${level.id}" class="form-check-input">
-                                    <label class="form-check-label" >${level.name} (${level.point})</label>
+                                    <label  class="form-check-label" for="idLevel" >${level.name} (${level.point})</label>
                                 </div>
                             </c:forEach>
 

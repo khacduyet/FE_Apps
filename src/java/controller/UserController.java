@@ -81,6 +81,22 @@ public class UserController {
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
         }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "text/plain; charset=UTF-8");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        String Url = baseUrl + "class";
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
+        String data = response.getBody();
+
+        Gson g = new Gson();
+        ReturnMessage c = g.fromJson(data, ReturnMessage.class);
+        List<entities.Class> cla = (List<entities.Class>) c.data;
+        m.addAttribute("data", cla);
+        
         Users user = new Users();
         m.addAttribute("VIEW", "Views/User/add.jsp");
         m.addAttribute("c", user);
@@ -123,16 +139,22 @@ public class UserController {
         headers.set("authorization", auth);
         headers.set("Content-Type", "text/plain; charset=UTF-8");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
-
+        
         String Url = baseUrl + "user/" + id;
+        String UrlClass = baseUrl + "class";
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseClass = rt.exchange(UrlClass, HttpMethod.GET, entity, String.class);
         String data = response.getBody();
+        String dataClass = responseClass.getBody();
 
         Gson g = new Gson();
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
         String json = g.toJson(c.data);
+        ReturnMessage _cla = g.fromJson(dataClass, ReturnMessage.class);
+        List<entities.Class> cla = (List<entities.Class>) _cla.data;
+        
         Users user = new Users();
         user = g.fromJson(json, user.getClass());
         String[] dobs = user.getDob().split(" ");
@@ -140,6 +162,7 @@ public class UserController {
             m.addAttribute("dob", dobs[0]);
         }
         m.addAttribute("c", user);
+        m.addAttribute("data", cla);
         m.addAttribute("VIEW", "Views/User/edit.jsp");
         return "MainPages";
     }
