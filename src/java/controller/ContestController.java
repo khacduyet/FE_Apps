@@ -178,6 +178,51 @@ public class ContestController {
         m.addAttribute("VIEW", "Views/Contest/edit.jsp");
         return "MainPages";
     }
+    
+    @RequestMapping(value = "/contest/detail", method = RequestMethod.GET)
+    public String getedDetail(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
+        String auth = CheckLogin(req);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "text/plain; charset=UTF-8");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        String Url = baseUrl + "contest/" + id;
+        String UrlExam = baseUrl + "exam";
+        String UrlClass = baseUrl + "class";
+        String UrlSubject = baseUrl + "subject";
+
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseExam = rt.exchange(UrlExam, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseClass = rt.exchange(UrlClass, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseSubject = rt.exchange(UrlSubject, HttpMethod.GET, entity, String.class);
+        String data = response.getBody();
+        String dataExam = responseExam.getBody();
+        String dataClass = responseClass.getBody();
+        String dataSubject = responseSubject.getBody();
+
+        Gson g = new Gson();
+        ReturnMessage c = g.fromJson(data, ReturnMessage.class);
+        ReturnMessage e = g.fromJson(dataExam, ReturnMessage.class);
+        ReturnMessage clas = g.fromJson(dataClass, ReturnMessage.class);
+        ReturnMessage subjects = g.fromJson(dataSubject, ReturnMessage.class);
+        Contest contest = new Contest();
+        String json = g.toJson(c.data);
+        contest = g.fromJson(json, contest.getClass());
+        List<Exam> exam = (List<Exam>) e.data;
+        List<entities.Class> cla = (List<entities.Class>) clas.data;
+        List<Subject> subs = (List<Subject>) subjects.data;
+        m.addAttribute("c", contest);
+        m.addAttribute("exam", exam);
+        m.addAttribute("cla", cla);
+        m.addAttribute("subs", subs);
+
+        m.addAttribute("VIEW", "Views/Contest/detail.jsp");
+        return "MainPages";
+    }
+
 
     @RequestMapping(value = "/contest/edit", method = RequestMethod.POST)
     public String postedForm(Model m, Contest c, HttpServletRequest req, RedirectAttributes redirectAttrs) {

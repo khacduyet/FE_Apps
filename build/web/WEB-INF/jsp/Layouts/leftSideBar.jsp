@@ -86,55 +86,56 @@
 
             <li>
                 <a href="/FE_ExamApplication/user.htm">
-                    <i class="mdi mdi-forum-outline"></i>
+                    <i class="mdi mdi-account-multiple-plus-outline"></i>
                     <span> User </span>
                 </a>
             </li>
 
             <li>
                 <a href="/FE_ExamApplication/subject.htm">
-                    <i class="mdi mdi-cog"></i>
+                    <i class="mdi mdi-file-multiple-outline"></i>
                     <span> Subject </span>
                 </a>
             </li>
             <li>
                 <a href="/FE_ExamApplication/level-point.htm">
-                    <i class="mdi mdi-cog"></i>
+                    <i class="mdi mdi-layers-outline"></i>
                     <span> Level point </span>
                 </a>
             </li>
 
             <li>
                 <a href="/FE_ExamApplication/question.htm">
-                    <i class="mdi mdi-cog"></i>
+                    <i class="mdi mdi-book-open-page-variant-outline"></i>
                     <span> Question </span>
                 </a>
             </li>
-            <li>
-                <a href="/FE_ExamApplication/report.htm">
-                    <i class="mdi mdi-cog"></i>
-                    <span> Report </span>
-                </a>
-            </li>
-            <li>
+             <li>
                 <a href="/FE_ExamApplication/exam.htm">
-                    <i class="mdi mdi-cog"></i>
+                    <i class="mdi mdi-map-outline"></i>
                     <span> Exam </span>
                 </a>
             </li>
+            
+
             <li>
                 <a href="/FE_ExamApplication/contest.htm">
-                    <i class="mdi mdi-cog"></i>
+                    <i class="mdi mdi-table"></i>
                     <span> Contest </span>
                 </a>
             </li>
             <li>
                 <a href="/FE_ExamApplication/examstudent.htm">
-                    <i class="mdi mdi-cog"></i>
+                    <i class="mdi mdi-texture"></i>
                     <span> Exam Student </span>
                 </a>
             </li>
-
+           <li>
+                <a href="/FE_ExamApplication/report.htm">
+                    <i class="mdi mdi-shield-outline"></i>
+                    <span> Report </span>
+                </a>
+            </li>
             <li>
                 <a href="#email" data-bs-toggle="collapse">
                     <i class="mdi mdi-email-outline"></i>

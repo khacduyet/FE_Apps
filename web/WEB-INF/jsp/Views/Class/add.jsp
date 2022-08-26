@@ -22,7 +22,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Class Name</label>
-                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
+                                <f:input path="className" id="validationCustom01" type="text"  cssClass="form-control" placeholder="Class name"  />
                             </div>
 
                             <div class="mb-3">

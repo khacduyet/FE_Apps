@@ -191,6 +191,54 @@ public class ExamController {
         m.addAttribute("c", exam);
         return "MainPages";
     }
+    @RequestMapping(value = "/exam/detais", method = RequestMethod.GET)
+    public String getedDetail(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
+        String auth = CheckLogin(req);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "text/plain; charset=UTF-8");
+        headers.set("Accept", "application/json");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        String Url = baseUrl + "exam/" + id;
+
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
+        String dataQuestion = response.getBody();
+        Gson g = new Gson();
+        ReturnMessage c = g.fromJson(dataQuestion, ReturnMessage.class);
+        String json = g.toJson(c.data);
+        Exam exam = new Exam();
+        exam = g.fromJson(json, exam.getClass());
+
+        String UrlQuestion = baseUrl + "exam/subject/" + exam.getIdSubject();
+        String UrlSubject = baseUrl + "subject/" + exam.getIdSubject();
+        String UrlLevel = baseUrl + "level-point";
+
+        ResponseEntity<String> responseQuestion = rt.exchange(UrlQuestion, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseSubject = rt.exchange(UrlSubject, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseLevel = rt.exchange(UrlLevel, HttpMethod.GET, entity, String.class);
+        String dataQuestionSub = responseQuestion.getBody();
+        String dataSubject = responseSubject.getBody();
+        String dataLevel = responseLevel.getBody();
+
+        ReturnMessage ques = g.fromJson(dataQuestionSub, ReturnMessage.class);
+        ReturnMessage sub = g.fromJson(dataSubject, ReturnMessage.class);
+        ReturnMessage level = g.fromJson(dataLevel, ReturnMessage.class);
+        List<Question> questions = (List<Question>) ques.data;
+        String subs = g.toJson(sub.data);
+        Subject subject = g.fromJson(subs, Subject.class);
+        List<LevelPoint> levels = (List<LevelPoint>) level.data;
+        m.addAttribute("questions", questions);
+        m.addAttribute("subject", subject);
+        m.addAttribute("levels", levels);
+
+        m.addAttribute("VIEW", "Views/Exam/details.jsp");
+        m.addAttribute("c", exam);
+        return "MainPages";
+    }
 
     @RequestMapping(value = "/exam/edit", method = RequestMethod.POST)
     public String postedForm(Model m, Exam c, HttpServletRequest req, RedirectAttributes redirectAttrs) {

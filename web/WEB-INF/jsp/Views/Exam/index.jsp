@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Table List Exam</h4>
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add New Record <i class="mdi mdi-chevron-down"></i></button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add New Exam <i class="mdi mdi-chevron-down"></i></button>
                             <div class="dropdown-menu">
                                 <c:forEach items="${subjects}" var="s">
                                     <a class="dropdown-item" href="exam/initInsert.htm?idSub=${s.id}">${s.name}</a>
@@ -37,8 +37,6 @@
                                     <th scope="col">Handle</th>
                                 </tr>
                             </thead>
-
-
                             <tbody>
                                 <c:forEach items="${data}" var="c" varStatus="loop">
                                     <tr class="text-center">
@@ -47,6 +45,7 @@
                                         <td>${c.note}</td>
                                         <td>${c.status}</td>
                                         <td class="text-center">
+                                             <a href="exam/detais.htm?id=${c.id}" class="btn btn-primary" style="margin-right: 20px"> Show Details </a>
                                             <a href="exam/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
                                             <a href="exam/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
                                         </td>
