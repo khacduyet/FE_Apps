@@ -5,6 +5,9 @@
  */
 package entities;
 
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  *
  * @author Admin
@@ -12,6 +15,8 @@ package entities;
 public class Class {
 
     private String id;
+    @NotEmpty(message = "Please enter your email addresss.")
+    @Size(min = 6, max = 15, message = "Your password must between 6 and 15 characters")
     private String className;
     private String note;
     private String course;

@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<style>
+    .error {
+        color: red; font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -22,7 +27,8 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Class Name</label>
-                                <f:input path="className" id="validationCustom01" type="text"  cssClass="form-control" placeholder="Class name"  />
+                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name"  />
+                                <f:errors path="className" cssClass="error"/><br><br>  
                             </div>
 
                             <div class="mb-3">

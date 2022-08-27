@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -40,6 +41,14 @@
                             <div class="mb-3">
                                 <label class="form-label">Date of birth</label>
                                 <input name="dob" type="date" value="${dob}" Class="form-control" placeholder="Date of birth" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="idClass" class="form-label">Class</label>
+                                <select class="form-select" name="idClass" id="idClass">
+                                    <c:forEach items="${data}" var="cc">
+                                        <option value="${cc.id}" ${cc.id == c.idClass ? "selected" : ""}>${cc.className}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
 
                             <div class="mb-3">
