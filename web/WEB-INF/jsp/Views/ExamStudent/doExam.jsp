@@ -17,13 +17,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="finished_exam.htm" method="POST">
+                        <form action="finished_exam.htm" method="POST" id="submit_exam">
                             <h4 class="mt-0 header-title">Student Exam</h4>
                             <p class="text-muted font-14 mb-3">
                                 <button type="submit" class="btn btn-success">Finish</button>
+                                <button type="button" id="exam_show_time">Click me!</button>
                             </p>
                             <h4 class="header-title mb-4">Exam in progress. Good Luck!</h4>
-                            <h4 style="color: red" class="mb-4">Time: 15p45s</h4>
+                            <h4 style="color: red" class="mb-4" >Time: <p id="timer_exam"></p></h4>
 
                             <div class="row">
                                 <div class="col-sm-3">
@@ -38,8 +39,10 @@
                                 </div>  
                                 <div class="col-sm-9">
                                     <div class="tab-content pt-2">
+                                        <input name="minuted" id="timeLost" hidden/>
                                         <input name="count" value="${count}" hidden/>
-                                        <input name="idContest" value="${idContest}" hidden/>
+                                        <input name="idContest" value="${contest.id}" hidden/>
+                                        <input name="timer_contest" id="timer_contest" value="${contest.testTime}" hidden/>
                                     </div>
                                     <div class="tab-content pt-2">
                                         <c:forEach items="${questions}" var="q" varStatus="loop">

@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/Contest/index.jsp</file>
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Layouts/leftSideBar.jsp</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/ContestController.java</file>
+            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/ExamStudent.java</file>
             <file>file:/D:/Project/FE_ExamApplication/web/resources/assets/js/myScript.js</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/entities/Contest.java</file>
+            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/ExamStudent/doExam.jsp</file>
         </group>
     </open-files>
 </project-private>
