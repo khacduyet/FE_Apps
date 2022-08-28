@@ -26,6 +26,8 @@ import entities.QuestionItem;
 import entities.Subject;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import model.CurrentUser;
+import model.JWT;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +42,7 @@ public class QuestionController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/question", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
@@ -66,6 +69,10 @@ public class QuestionController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Question/index.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -101,6 +108,10 @@ public class QuestionController {
         Question cla = new Question();
         m.addAttribute("VIEW", "Views/Question/add.jsp");
         m.addAttribute("c", cla);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -180,7 +191,7 @@ public class QuestionController {
         String json = g.toJson(c.data);
         Question cla = new Question();
         cla = g.fromJson(json, cla.getClass());
-        
+
         QuestionItem pos0 = cla.Items.get(0);
         QuestionItem pos1 = cla.Items.get(1);
         QuestionItem pos2 = cla.Items.get(2);
@@ -192,6 +203,10 @@ public class QuestionController {
         m.addAttribute("pos1", pos1);
         m.addAttribute("pos2", pos2);
         m.addAttribute("pos3", pos3);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -205,7 +220,7 @@ public class QuestionController {
         headers.set("authorization", auth);
         headers.set("Content-Type", "application/json; charset=UTF-8");
         headers.set("Accept", "application/json");
-        
+
         List<QuestionItem> qis = new ArrayList<>();
         int count = 0;
         for (String a : answer) {
@@ -221,7 +236,7 @@ public class QuestionController {
             count++;
         }
         c.setItems(qis);
-        
+
         Gson g = new Gson();
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);

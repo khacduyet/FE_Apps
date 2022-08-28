@@ -17,9 +17,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Report</h4>
+                        <h4 class="mt-0 header-title">Contest Data</h4>
                         <p class="text-muted font-14 mb-3">
-                            <a href="contest/initInsert.htm" class="btn btn-primary">Add New Record</a>
+                            <a href="contest/initInsert.htm" class="btn btn-primary">Add New Contest</a>
                         </p>
 
                         <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
@@ -46,6 +46,7 @@
                                         <td>${c.subjectName}</td>
                                         <td>${c.status}</td>
                                         <td class="text-center">
+                                        <a href="contest/detail.htm?id=${c.id}" class="btn btn-primary" style="margin-right: 20px"> Details </a>
                                         <a href="contest/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
                                         <a href="contest/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
                                     </td>

@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="mb-1 fw-bold text-muted mt-3 mt-md-0">Questions</p>
+                                    <p class="mb-1 fw-bold text-muted mt-3 mt-md-0">Click Choose Questions</p>
 
                                     <select multiple="multiple" class="multi-select" id="my_multi_select2" name="questions" data-plugin="multiselect" data-selectable-optgroup="true">
                                         <c:forEach items="${levels}" var="level">

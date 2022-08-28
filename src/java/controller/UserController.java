@@ -28,6 +28,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.CurrentUser;
+import model.JWT;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
@@ -44,6 +46,7 @@ public class UserController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
@@ -72,6 +75,10 @@ public class UserController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/User/index.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -96,10 +103,14 @@ public class UserController {
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
         List<entities.Class> cla = (List<entities.Class>) c.data;
         m.addAttribute("data", cla);
-        
+
         Users user = new Users();
         m.addAttribute("VIEW", "Views/User/add.jsp");
         m.addAttribute("c", user);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -139,7 +150,7 @@ public class UserController {
         headers.set("authorization", auth);
         headers.set("Content-Type", "text/plain; charset=UTF-8");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
-        
+
         String Url = baseUrl + "user/" + id;
         String UrlClass = baseUrl + "class";
         RestTemplate rt = new RestTemplate();
@@ -154,7 +165,7 @@ public class UserController {
         String json = g.toJson(c.data);
         ReturnMessage _cla = g.fromJson(dataClass, ReturnMessage.class);
         List<entities.Class> cla = (List<entities.Class>) _cla.data;
-        
+
         Users user = new Users();
         user = g.fromJson(json, user.getClass());
         String[] dobs = user.getDob().split(" ");
@@ -164,6 +175,10 @@ public class UserController {
         m.addAttribute("c", user);
         m.addAttribute("data", cla);
         m.addAttribute("VIEW", "Views/User/edit.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 

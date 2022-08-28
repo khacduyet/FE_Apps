@@ -18,17 +18,19 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="finished_exam.htm" method="POST" id="submit_exam">
-                            <h4 class="mt-0 header-title">Student Exam</h4>
-                            <p class="text-muted font-14 mb-3">
-                                <button type="submit" class="btn btn-success">Finish</button>
-                                <button type="button" id="exam_show_time">Click me!</button>
-                            </p>
-                            <h4 class="header-title mb-4">Exam in progress. Good Luck!</h4>
-                            <h4 style="color: red" class="mb-4" >Time: <p id="timer_exam"></p></h4>
+                            <div style="padding-left: 200px">
+                                <h4 class="mt-0 header-title">Student Exam</h4>
+                                <p class="text-muted font-14 mb-3">
+                                    <button type="submit" class="btn btn-success">Finish</button>
+                                </p>
+                                <h4 class="header-title mb-4">Exam in progress. Good Luck!</h4>
+                                <h4 style="color: red" class="mb-4" >Time: <p id="timer_exam"></p></h4>
+                                <hr>
+                            </div>
 
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="nav flex-column nav-pills nav-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background: #fbfbfb; border-radius: 20px; height: 500px; overflow-y: auto;">
+                                <div class="col-lg-3">
+                                    <div class="nav flex-column nav-pills nav-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background: #fbfbfb; padding-left: 120px;overflow-y: auto; text-align: center ">
                                         <c:forEach items="${questions}" var="q" varStatus="loop">
                                             <a class="nav-link ${loop.count == 1 ? "active" : ""} show mb-1" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-${q.id}" role="tab" aria-controls="v-pills-${q.id}"
                                                aria-selected="false">
@@ -37,7 +39,7 @@
                                         </c:forEach>
                                     </div>
                                 </div>  
-                                <div class="col-sm-9">
+                                <div class="col-lg-9" style="padding-left: 200px;padding-top: 50px">
                                     <div class="tab-content pt-2">
                                         <input name="minuted" id="timeLost" hidden/>
                                         <input name="count" value="${count}" hidden/>

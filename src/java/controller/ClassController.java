@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import entities.Class;
 import java.nio.charset.StandardCharsets;
+import javax.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,22 +68,32 @@ public class ClassController {
     }
 
     @RequestMapping(value = "/class/initInsert", method = RequestMethod.GET)
-    public String getForm(Model m, HttpServletRequest req) {
+    public String getForm(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
         }
-        Class cla = new Class();
+        Class cla = null;
+        Class _cOld = (Class) m.asMap().get("_cOld");
+        if (_cOld != null) {
+            cla = _cOld;
+        } else {
+            cla = new Class();
+        }
         m.addAttribute("VIEW", "Views/Class/add.jsp");
         m.addAttribute("c", cla);
         return "MainPages";
     }
 
     @RequestMapping(value = "/class/insert", method = RequestMethod.POST)
-    public String postForm(Model m, Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+    public String postForm(Model m, @Valid @ModelAttribute("c") Class c, BindingResult result, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
+        }
+        if (result.hasErrors()) {
+            redirectAttrs.addFlashAttribute("_cOld", c);
+            return "redirect:/class/initInsert.htm";
         }
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
@@ -89,12 +102,10 @@ public class ClassController {
         Gson g = new Gson();
         String e = g.toJson(c);
         HttpEntity<String> entity = new HttpEntity<String>(e, headers);
-
         String Url = baseUrl + "class";
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         String data = rt.postForObject(Url, entity, String.class);
-
         ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
         String msg = rmsg.message;
         redirectAttrs.addFlashAttribute("msg", msg);

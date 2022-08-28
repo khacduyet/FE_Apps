@@ -13,7 +13,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
-import entities.Role;
+//import entities.Role;
 import entities.Users;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +38,7 @@ public class JWT {
             builder.claim("id", user.getId());
             builder.claim("name", user.getName());
             builder.claim("password", user.getPassword());
+            builder.claim("email", user.getEmail());
             builder.claim("image", user.getImage());
             builder.claim("roles", user.getRoles());
             builder.expirationTime(generateExpirationDate());
@@ -86,6 +87,7 @@ public class JWT {
             user.setId((String) claims.getClaim("id"));
             user.setName((String) claims.getClaim("name"));
             user.setPassWord((String) claims.getClaim("password"));
+            user.setEmail((String) claims.getClaim("email"));
             user.setImage((String) claims.getClaim("image"));
             user.setRoles((List<String>) claims.getClaim("roles"));
         } catch (Exception e) {
@@ -93,7 +95,7 @@ public class JWT {
         }
         return user;
     }
-    
+
     public String getUsernameFromToken(String token) {
         String username = null;
         try {

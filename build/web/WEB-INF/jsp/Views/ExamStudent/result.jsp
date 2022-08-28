@@ -34,7 +34,7 @@
                                 <td class="content-wrap" colspan="2"
                                     style="height: 50px!important;text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;padding: 10px; background-color: #fff;"
                                     valign="top">
-                                    <h1>EAP FINISHED EXAM</h1>
+                                    <h1>${rr.exam.content}</h1>
                                 </td>
                             </tr>
                             <tr style="height: 300px!important;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -54,7 +54,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>NGUYEN HUU THANG</h3>
+                                                <h3>${rr.user.name}</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -66,7 +66,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>EAP</h3>
+                                                <h3>${rr.subject.name}</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -78,7 +78,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                               <h3>2/19</h3>
+                                               <h3>${rr.corrected}</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -90,7 +90,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>20</h3>
+                                                <h3>${rr.score}</h3>
                                             </td>
                                         </tr>
                                     </table>
@@ -111,7 +111,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>C1909I2</h3>
+                                                <h3>${rr.contest.nameClass}</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -123,7 +123,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>45 minute</h3>
+                                                <h3>${rr.contest.testTime} minute</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -135,19 +135,19 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>15 minute</h3>
+                                                <h3>${rr.minuted} minute</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3><b>YOUR POINT: </b></h3>
+                                                <h3 style="color: red"><b>YOUR POINT: </b></h3>
                                             </td>
                                             <td class="content-block"
-                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
+                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px"
                                                 valign="top">
-                                                <h3>2</h3>
+                                                <h3 style="color: red">${rr.point}</h3>
                                             </td>
                                         </tr>
                                     </table>
