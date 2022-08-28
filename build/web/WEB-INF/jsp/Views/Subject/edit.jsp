@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<style>
+    .error {
+        color: red; font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -15,14 +20,15 @@
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-6">
-                        <f:form action="edit.htm" method="POST" commandName="c" >
+                        <f:form action="edit.htm" method="POST" commandName="c" onsubmit="return Validate()" >
                             <div class="mb-3" hidden="">
                                 <label class="form-label">Id</label>
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
-                                <f:input path="name" type="text"  cssClass="form-control" placeholder="Name" />
+                                <f:input id="name" path="name" type="text"  cssClass="form-control" placeholder="Name" />
+                                <label id="errname" class="error" value=""></label>
                             </div>
 
                             <div class="mb-3">
@@ -50,3 +56,15 @@
         </div> <!-- end card -->
     </div><!-- end col -->
 </div>
+<script>
+    function Validate() {
+        var name = $('#name').val();
+        if (name == '') {
+            $('#errname').html('Name is not null!');
+            return false
+        } else {
+            $('#errname').html('');
+        }
+        return true;
+    }
+</script>

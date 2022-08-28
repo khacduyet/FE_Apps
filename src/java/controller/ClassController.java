@@ -22,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 import entities.Class;
 import java.nio.charset.StandardCharsets;
 import javax.validation.Valid;
+import model.CurrentUser;
+import model.JWT;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,7 @@ public class ClassController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/class", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
@@ -64,6 +67,10 @@ public class ClassController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Class/index.jsp");
+
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -82,6 +89,10 @@ public class ClassController {
         }
         m.addAttribute("VIEW", "Views/Class/add.jsp");
         m.addAttribute("c", cla);
+
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -90,10 +101,6 @@ public class ClassController {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
-        }
-        if (result.hasErrors()) {
-            redirectAttrs.addFlashAttribute("_cOld", c);
-            return "redirect:/class/initInsert.htm";
         }
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
@@ -133,6 +140,10 @@ public class ClassController {
         cla = g.fromJson(json, cla.getClass());
         m.addAttribute("c", cla);
         m.addAttribute("VIEW", "Views/Class/edit.jsp");
+
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 

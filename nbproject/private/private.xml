@@ -2,17 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/entities/Exam.java</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/ExamStudent.java</file>
-            <file>file:/D:/Project/FE_ExamApplication/web/resources/assets/js/myScript.js</file>
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/ExamStudent/doExam.jsp</file>
-            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/ExamStudent/result.jsp</file>
-            <file>file:/D:/Project/FE_ExamApplication/src/java/model/ReturnResult.java</file>
+            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/controller/ContestController.java</file>
+            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/controller/ClassController.java</file>
+            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/web/WEB-INF/jsp/Views/Class/add.jsp</file>
+            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/entities/Class.java</file>
+            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/src/java/entities/Exam.java</file>
         </group>
-=======
-        <group/>
->>>>>>> 57dd69e20ffcd63e53b2368151428e9f5e026ce0
     </open-files>
 </project-private>

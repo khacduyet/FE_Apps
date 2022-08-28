@@ -7,6 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<style>
+    .error {
+        color: red; font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -16,39 +21,46 @@
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-6">
-                        <f:form action="insert.htm" method="POST" commandName="c" >
+                        <f:form action="insert.htm" method="POST" commandName="c" onsubmit="return Validate()">
                             <div class="mb-3" hidden="">
                                 <label class="form-label">Id</label>
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
-                                <f:input path="username" type="text"  cssClass="form-control" placeholder="Username" />
+                                <f:input id="username" path="username" type="text"  cssClass="form-control" placeholder="Username" />
+                                <label id="errusername" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <f:password path="password" cssClass="form-control" placeholder="Password" />
+                                <f:password id="password" path="password" cssClass="form-control" placeholder="Password" />
+                                <label id="errpassword" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
-                                <f:input path="name" type="text"  cssClass="form-control" placeholder="Name" />
+                                <f:input id="name" path="name" type="text"  cssClass="form-control" placeholder="Name" />
+                                 <label id="errname" class="error" value=""></label>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <f:input path="email" type="text"  cssClass="form-control" placeholder="Email" />
+                                <f:input id="email" path="email" type="text"  cssClass="form-control" placeholder="Email" />
+                                <label id="erremail" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Age</label>
-                                <f:input path="age" type="number"  cssClass="form-control" placeholder="Age" />
+                                <f:input id="age" path="age" type="number"  cssClass="form-control" placeholder="Age" />
+                                <label id="errage" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Village</label>
-                                <f:input path="village" type="text"  cssClass="form-control" placeholder="Village" />
+                                <f:input id="village" path="village" type="text"  cssClass="form-control" placeholder="Village" />
+                                <label id="errvillage" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Date of birth</label>
-                                <f:input path="dob" type="date"  cssClass="form-control" placeholder="Date of birth" />
+                                <f:input id="dob" path="dob" type="date"  cssClass="form-control" placeholder="Date of birth" />
+                                <label id="errdob" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label for="idClass" class="form-label">Class</label>
@@ -79,3 +91,57 @@
         </div> <!-- end card -->
     </div><!-- end col -->
 </div>
+<script>
+    function Validate() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var age = $('#age').val();
+        var village = $('#village').val();
+        var dob = $('#dob').val();
+        if (username == '') {
+            $('#errusername').html('User name is not null!');
+            return false
+        } else {
+            $('#errusername').html('');
+        }
+        if (password == '') {
+            $('#errpassword').html('Password is not null!');
+            return false
+        } else {
+            $('#errpassword').html('');
+        }
+        if (name == '') {
+            $('#errname').html('Name is not null!');
+            return false
+        } else {
+            $('#errname').html('');
+        }
+        if (email == '') {
+            $('#erremail').html('Email is not null!');
+            return false
+        } else {
+            $('#erremail').html('');
+        }
+        if (age == '') {
+            $('#errage').html('Email is not null!');
+            return false
+        } else {
+            $('#errage').html('');
+        }
+        if (village == '') {
+            $('#errvillage').html('Village is not null!');
+            return false
+        } else {
+            $('#errvillage').html('');
+        }
+        if (dob == '') {
+            $('#errdob').html('Birtday is not null!');
+            return false
+        } else {
+            $('#errdob').html('');
+        }
+        return true;
+    }
+</script>

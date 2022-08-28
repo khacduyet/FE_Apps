@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<style>
+    .error {
+        color: red; font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -15,23 +20,26 @@
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-6">
-                        <f:form action="edit.htm" method="POST" commandName="c" >
+                        <f:form action="edit.htm" method="POST" commandName="c" onsubmit="return Validate()">
                             <div class="mb-3" hidden="">
                                 <label class="form-label">Id</label>
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Class Name</label>
-                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
+                                <f:input id="className" path="className" type="text"  cssClass="form-control" placeholder="Class name"  />
+                                <label id="errClassName" class="error" value=""></label>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Course</label>
-                                <f:input path="course" type="text"  cssClass="form-control" placeholder="Course" />
+                                <f:input id="course" path="course" type="text"  cssClass="form-control" placeholder="Course" />
+                                <label id="errCourse" class="error" value=""></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">School year</label>
-                                <f:input path="schoolYear" type="text"  cssClass="form-control" placeholder="School year" />
+                                <f:input id="schoolYear" path="schoolYear" type="text"  cssClass="form-control" placeholder="School year" />
+                                <label id="errSchoolYear" class="error" value=""></label>
                             </div>
 
                             <div class="mb-3">
@@ -59,3 +67,29 @@
         </div> <!-- end card -->
     </div><!-- end col -->
 </div>
+<script>
+    function Validate() {
+        var className = $('#className').val();
+        var course = $('#course').val();
+        var schoolYear = $('#schoolYear').val();
+        if (className == '') {
+            $('#errClassName').html('Class name is not null!');
+            return false
+        } else {
+            $('#errClassName').html('');
+        }
+        if (course == '') {
+            $('#errCourse').html('Course is not null!');
+            return false
+        } else {
+            $('#errCourse').html('');
+        }
+        if (schoolYear == '') {
+            $('#errSchoolYear').html('School Year is not null!');
+            return false
+        } else {
+            $('#errSchoolYear').html('');
+        }
+        return true;
+    }
+</script>
