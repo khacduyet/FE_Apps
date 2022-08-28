@@ -111,7 +111,7 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                <h3>${rr.contest.nameClass}</h3>
+                                                <h3>${rr.contest.className}</h3>
                                             </td>
                                         </tr>
                                         <tr style="text-decoration: overline;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

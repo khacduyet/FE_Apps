@@ -31,13 +31,16 @@
                                 <form action="start_exam.htm">
                                     <div class="mb-3 d-grid text-center">
                                         <select class="form-select" name="idContest" id="idContest">
+                                            <c:if test="${contest.size() == 0}">
+                                                <option disabled selected value> -- There is no test for you -- </option>
+                                            </c:if>
                                             <c:forEach items="${contest}" var="con">
                                                 <option value="${con.id}">${con.className}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                     <div class="mb-3 d-grid text-center">
-                                        <button class="btn btn-primary" type="submit"> Choose .. </button>
+                                        <button class="btn btn-primary" type="submit" ${contest.size() == 0 ? "disabled" : ""}> Choose .. </button>
                                     </div>
                                 </form>
                             </div> <!-- end card-body -->

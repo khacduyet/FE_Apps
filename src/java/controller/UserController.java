@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.CurrentUser;
 import model.JWT;
+import model.ModelRole;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
@@ -80,6 +81,31 @@ public class UserController {
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
+    }
+    
+    @RequestMapping(value = "/user/assign_role", method = RequestMethod.POST)
+    public String assignForm(Model m, ModelRole c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+        String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "application/json; charset=UTF-8");
+        headers.set("Accept", "application/json");
+        Gson g = new Gson();
+        String e = g.toJson(c);
+        HttpEntity<String> entity = new HttpEntity<String>(e, headers);
+
+        String Url = baseUrl + "user/assign_role";
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        String data = rt.postForObject(Url, entity, String.class);
+
+        ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
+        String msg = rmsg.message;
+        redirectAttrs.addFlashAttribute("msg", msg);
+        return "redirect:/user.htm";
     }
 
     @RequestMapping(value = "/user/initInsert", method = RequestMethod.GET)
