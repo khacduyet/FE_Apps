@@ -29,7 +29,7 @@ function GetExam() {
     }).then(function (x) {
         var str = "<option value='0' >Choose exam ..</option>";
         $.each(x.data, function (index, data) {
-            str += "<option value='" + data.id + "' " + ((idExam == data.id) ? "selected" : "") +">" + data.content + "</option>";
+            str += "<option value='" + data.id + "' " + ((idExam == data.id) ? "selected" : "") + ">" + data.content + "</option>";
         });
         $("#idExam").html(str);
     });
@@ -53,3 +53,44 @@ function getCookie(cname) {
     }
     return "";
 }
+
+
+
+// Timer
+$("#exam_show_time").click(setTimer);
+
+function setTimer() {
+    var minute = $("#timer_contest").val() - 1;
+    var second = 60;
+    var x = setInterval(function () {
+        second -= 1;
+        if (minute == 0 && second == 0) {
+            clearInterval(x);
+            $("#submit_exam").submit();
+        } else {
+            var str_minute = "";
+            var str_second = "";
+            if (str_minute < 10) {
+                str_minute += "0" + minute;
+            } else {
+                str_minute += minute;
+            }
+            if (second < 10) {
+                str_second += "0" + second;
+            } else {
+                str_second += second;
+            }
+            var timer = minute + ":" + str_second;
+            $("#timer_exam").text(timer);
+            if (second == 0) {
+                second = 60;
+                if (minute > 0) {
+                    minute -= 1;
+                    $("#timeLost").val(minute);
+                }
+            }
+        }
+    }, 1000);
+
+}
+setTimer();

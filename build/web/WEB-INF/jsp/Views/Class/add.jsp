@@ -28,7 +28,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Class Name</label>
                                 <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name"  />
-                                <f:errors path="className" cssClass="error"/><br><br>  
+                                <f:errors path="className" cssClass="error"/>
+                               
                             </div>
 
                             <div class="mb-3">
