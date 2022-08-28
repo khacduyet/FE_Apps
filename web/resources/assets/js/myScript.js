@@ -94,3 +94,26 @@ function setTimer() {
 
 }
 setTimer();
+
+$("._assign").click(function () {
+    var id = $(this).data("id");
+    var auth = getCookie("authorization");
+    var url = "http://localhost:8080/ExamApplication/api/role/user_role/" + id;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain',
+            'Authorization': auth
+        }
+    }).then(function (res) {
+        return res.json();
+    }).then(function (x) {
+        $("#_id").val(id);
+        var str = "";
+        $.each(x.data, function (index, data) {
+            str += "<option value='" + data.id + "' " + ((data.isValid) ? "selected" : "") + ">" + data.name + " - " + data.code + "</option>";
+        });
+        $("#_role").html(str);
+    });
+});

@@ -39,6 +39,15 @@ public class Contest {
     public String idExam;
     public String nameExam;
     public String nameClass;
+    public boolean isPassed;
+
+    public boolean isIsPassed() {
+        return isPassed;
+    }
+
+    public void setIsPassed(boolean isPassed) {
+        this.isPassed = isPassed;
+    }
 
     public String getNameClass() {
         return nameClass;

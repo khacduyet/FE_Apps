@@ -39,13 +39,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author AdminDEV
  */
 @Controller
-public class ExamStudent {
+public class HistoryController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
     JWT _jwt = new JWT();
 
-    @RequestMapping(value = "/examstudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
@@ -58,7 +58,7 @@ public class ExamStudent {
 
         CurrentUser cu = _jwt.getUserFromToken(auth);
 
-        String Url = baseUrl + "contest/contest_user/" + cu.getId();
+        String Url = baseUrl + "contest/result_exam";
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
@@ -66,20 +66,20 @@ public class ExamStudent {
 
         Gson g = new Gson();
         ReturnMessage c = g.fromJson(data, ReturnMessage.class);
-        List<Contest> contest = (List<Contest>) c.data;
-        m.addAttribute("contest", contest);
+        List<ReturnResult> rr = (List<ReturnResult>) c.data;
+        m.addAttribute("rr", rr);
 
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
-        m.addAttribute("VIEW", "Views/ExamStudent/index.jsp");
+        m.addAttribute("VIEW", "Views/History/index.jsp");
 
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
-    @RequestMapping(value = "/start_exam", method = RequestMethod.GET)
-    public String getForm(Model m, HttpServletRequest req, String idContest, RedirectAttributes redirectAttrs) {
+    @RequestMapping(value = "/history/detail", method = RequestMethod.GET)
+    public String getForm(Model m, HttpServletRequest req, @RequestParam(value = "id") String id, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
@@ -89,75 +89,15 @@ public class ExamStudent {
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", auth);
         headers.set("Content-Type", "text/plain; charset=UTF-8");
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-
-        String Url = baseUrl + "contest/get_exam/" + idContest;
-        String UrlCheck = baseUrl + "contest/check_exam/" + idContest;
-        String UrlContest = baseUrl + "contest/" + idContest;
-        RestTemplate rt = new RestTemplate();
-        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        ResponseEntity<String> responseCheck = rt.exchange(UrlCheck, HttpMethod.GET, entity, String.class);
-        Gson g = new Gson();
-        String dataCheck = responseCheck.getBody();
-        ReturnMessage cCheck = g.fromJson(dataCheck, ReturnMessage.class);
-        boolean b = (boolean) cCheck.data;
-        if (b == true) {
-            redirectAttrs.addFlashAttribute("msg", "You took this exam!");
-            return "redirect:examstudent.htm";
-        }
-
-        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
-        ResponseEntity<String> responseContest = rt.exchange(UrlContest, HttpMethod.GET, entity, String.class);
-        String data = response.getBody();
-        String dataContest = responseContest.getBody();
-
-        ReturnMessage c = g.fromJson(data, ReturnMessage.class);
-        ReturnMessage cContest = g.fromJson(dataContest, ReturnMessage.class);
-        String datacContest = g.toJson(cContest.data);
-        List<Question> questions = (List<Question>) c.data;
-        Contest contest = g.fromJson(datacContest, Contest.class);
-
-        m.addAttribute("VIEW", "Views/ExamStudent/doExam.jsp");
-        m.addAttribute("questions", questions);
-        m.addAttribute("count", questions.size());
-        m.addAttribute("contest", contest);
-
-        m.addAttribute("currentUser", cu);
-        m.addAttribute("role", cu.getRoles().get(0));
-        return "MainPages";
-    }
-
-    @RequestMapping(value = "/finished_exam", method = RequestMethod.POST)
-    public String postForm(Model m, int count, ResultExam re, HttpServletRequest req, RedirectAttributes redirectAttrs) {
-        String auth = CheckLogin(req);
-        if (auth.isEmpty()) {
-            return "redirect:/login.htm";
-        }
-        CurrentUser cu = _jwt.getUserFromToken(auth);
-
-        List<String> answers = new ArrayList<>();
-        for (int i = 1; i <= count; i++) {
-            String answer = req.getParameter("question" + i);
-            if (answer == null) {
-                answer = "";
-            }
-            answers.add(answer);
-        }
-        re.setIdAnswer(answers);
-        re.setIdUser(cu.getId());
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("authorization", auth);
-        headers.set("Content-Type", "application/json; charset=UTF-8");
         headers.set("Accept", "application/json");
         Gson g = new Gson();
-        String e = g.toJson(re);
-        HttpEntity<String> entity = new HttpEntity<String>(e, headers);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        String Url = baseUrl + "contest/finishedExam";
+        String Url = baseUrl + "contest/result_exam/" + id;
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        String data = rt.postForObject(Url, entity, String.class);
+        ResponseEntity<String> response = rt.exchange(Url, HttpMethod.GET, entity, String.class);
+        String data = response.getBody();
 
         ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
         String msg = rmsg.message;
@@ -165,8 +105,8 @@ public class ExamStudent {
         ReturnResult rr = g.fromJson(rdata, ReturnResult.class);
         redirectAttrs.addFlashAttribute("msg", msg);
         m.addAttribute("rr", rr);
-        m.addAttribute("VIEW", "Views/ExamStudent/result.jsp");
-        
+        m.addAttribute("VIEW", "Views/History/result.jsp");
+
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";

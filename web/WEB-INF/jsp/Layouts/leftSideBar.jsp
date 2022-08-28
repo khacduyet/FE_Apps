@@ -134,6 +134,12 @@
                 </c:when>  
             </c:choose>
             <li>
+                <a href="/FE_ExamApplication/history.htm">
+                    <i class="mdi mdi-shield-outline"></i>
+                    <span> History Exam </span>
+                </a>
+            </li>
+            <li>
                 <a href="/FE_ExamApplication/report.htm">
                     <i class="mdi mdi-shield-outline"></i>
                     <span> Report </span>

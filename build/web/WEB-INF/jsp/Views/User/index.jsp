@@ -36,8 +36,6 @@
                                     <th scope="col">Handle</th>
                                 </tr>
                             </thead>
-
-
                             <tbody>
                                 <c:forEach items="${data}" var="c" varStatus="loop">
                                     <tr class="text-center">
@@ -50,9 +48,10 @@
                                         <td>${c.dob}</td>
                                         <td>${c.isActive}</td>
                                         <td class="text-center">
-                                        <a href="/FE_ExamApplication/user/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="/FE_ExamApplication/user/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
-                                    </td>
+                                            <button type="button" class="btn btn-info _assign" data-bs-toggle="modal" data-bs-target="#login-modal" data-id="${c.id}">Assign Role</button>
+                                            <a href="/FE_ExamApplication/user/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
+                                            <a href="/FE_ExamApplication/user/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -62,5 +61,45 @@
 
             </div>
         </div>
+        <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-center mt-2 mb-4">
+                            <div class="auth-logo">
+                                <div class="logo logo-light">
+                                    <span class="logo-lg">
+                                        <img src="assets/images/logo-light.png" alt="" height="22">
+                                    </span>
+                                </div>
+
+                                <div class="logo logo-dark">
+                                    <span class="logo-lg">
+                                        <img src="assets/images/logo-dark.png" alt="" height="22">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form action="user/assign_role.htm" class="px-3" method="POST">
+                            <h2>ASSIGN PERMISSION</h2>
+                            <div class="mb-3">
+                                <input name="idUser" value="" type="hidden" id="_id"/>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="idRole" id="_role">
+                                    
+                                </select>
+                            </div>
+                            <div class="mb-2 text-center">
+                                <button class="btn rounded-pill btn-primary" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </body>
 </html>
