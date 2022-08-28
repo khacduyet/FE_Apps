@@ -22,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 import entities.Class;
 import entities.Subject;
 import java.nio.charset.StandardCharsets;
+import model.CurrentUser;
+import model.JWT;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +38,7 @@ public class SubjectController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/subject", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
@@ -62,6 +65,10 @@ public class SubjectController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Subject/index.jsp");
+
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -74,6 +81,10 @@ public class SubjectController {
         Subject cla = new Subject();
         m.addAttribute("VIEW", "Views/Subject/add.jsp");
         m.addAttribute("c", cla);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -123,6 +134,10 @@ public class SubjectController {
         cla = g.fromJson(json, cla.getClass());
         m.addAttribute("c", cla);
         m.addAttribute("VIEW", "Views/Subject/edit.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 

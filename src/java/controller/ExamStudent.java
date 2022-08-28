@@ -72,6 +72,9 @@ public class ExamStudent {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/ExamStudent/index.jsp");
+        
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -107,47 +110,50 @@ public class ExamStudent {
         m.addAttribute("questions", questions);
         m.addAttribute("count", questions.size());
         m.addAttribute("contest", contest);
+        CurrentUser cu = _jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
     @RequestMapping(value = "/finished_exam", method = RequestMethod.POST)
     public String postForm(Model m, int count, ResultExam re, HttpServletRequest req, RedirectAttributes redirectAttrs) {
-//        String auth = CheckLogin(req);
-//        if (auth.isEmpty()) {
-//            return "redirect:/login.htm";
-//        }
-//        CurrentUser cu = _jwt.getUserFromToken(auth);
-//
-//        List<String> answers = new ArrayList<>();
-//        for (int i = 1; i <= count; i++) {
-//            String answer = req.getParameter("question" + i);
-//            if (answer == null) {
-//                answer = "";
-//            }
-//            answers.add(answer);
-//        }
-//        re.setIdAnswer(answers);
-//        re.setIdUser(cu.getId());
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", auth);
-//        headers.set("Content-Type", "application/json; charset=UTF-8");
-//        headers.set("Accept", "application/json");
-//        Gson g = new Gson();
-//        String e = g.toJson(re);
-//        HttpEntity<String> entity = new HttpEntity<String>(e, headers);
-//
-//        String Url = baseUrl + "contest/finishedExam";
-//        RestTemplate rt = new RestTemplate();
-//        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-//        String data = rt.postForObject(Url, entity, String.class);
-//
-//        ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
-//        String msg = rmsg.message;
-//        String rdata = g.toJson(rmsg.data);
-//        ReturnResult rr = g.fromJson(rdata, ReturnResult.class);
-//        redirectAttrs.addFlashAttribute("msg", msg);
-//        m.addAttribute("rr", rr);
+        String auth = CheckLogin(req);
+        if (auth.isEmpty()) {
+            return "redirect:/login.htm";
+        }
+        CurrentUser cu = _jwt.getUserFromToken(auth);
+
+        List<String> answers = new ArrayList<>();
+        for (int i = 1; i <= count; i++) {
+            String answer = req.getParameter("question" + i);
+            if (answer == null) {
+                answer = "";
+            }
+            answers.add(answer);
+        }
+        re.setIdAnswer(answers);
+        re.setIdUser(cu.getId());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", auth);
+        headers.set("Content-Type", "application/json; charset=UTF-8");
+        headers.set("Accept", "application/json");
+        Gson g = new Gson();
+        String e = g.toJson(re);
+        HttpEntity<String> entity = new HttpEntity<String>(e, headers);
+
+        String Url = baseUrl + "contest/finishedExam";
+        RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        String data = rt.postForObject(Url, entity, String.class);
+
+        ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
+        String msg = rmsg.message;
+        String rdata = g.toJson(rmsg.data);
+        ReturnResult rr = g.fromJson(rdata, ReturnResult.class);
+        redirectAttrs.addFlashAttribute("msg", msg);
+        m.addAttribute("rr", rr);
         m.addAttribute("VIEW", "Views/ExamStudent/result.jsp");
         return "MainPages";
     }

@@ -21,6 +21,8 @@ import entities.ReturnMessage;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import model.CurrentUser;
+import model.JWT;
 
 /**
  *
@@ -30,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req) {
@@ -38,6 +41,10 @@ public class HomeController {
             return "redirect:/login.htm";
         }
         m.addAttribute("VIEW", "Views/Home.jsp");
+
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 

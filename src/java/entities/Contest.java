@@ -38,6 +38,15 @@ public class Contest {
     public String modifiedByName;
     public String idExam;
     public String nameExam;
+    public String nameClass;
+
+    public String getNameClass() {
+        return nameClass;
+    }
+
+    public void setNameClass(String nameClass) {
+        this.nameClass = nameClass;
+    }
 
     public String getSubjectName() {
         return subjectName;
@@ -62,7 +71,6 @@ public class Contest {
     public void setNameExam(String nameExam) {
         this.nameExam = nameExam;
     }
-    
 
     public String getId() {
         return id;
@@ -167,6 +175,5 @@ public class Contest {
     public void setModifiedByName(String modifiedByName) {
         this.modifiedByName = modifiedByName;
     }
-    
-    
+
 }

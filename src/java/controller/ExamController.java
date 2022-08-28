@@ -27,6 +27,8 @@ import entities.QuestionItem;
 import entities.Subject;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import model.CurrentUser;
+import model.JWT;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +43,7 @@ public class ExamController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/exam", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
@@ -73,6 +76,10 @@ public class ExamController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Exam/index.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -114,6 +121,10 @@ public class ExamController {
         Exam cla = new Exam();
         m.addAttribute("VIEW", "Views/Exam/add.jsp");
         m.addAttribute("c", cla);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -189,8 +200,13 @@ public class ExamController {
 
         m.addAttribute("VIEW", "Views/Exam/edit.jsp");
         m.addAttribute("c", exam);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
+
     @RequestMapping(value = "/exam/detais", method = RequestMethod.GET)
     public String getedDetail(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
         String auth = CheckLogin(req);

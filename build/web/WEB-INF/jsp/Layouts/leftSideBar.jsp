@@ -5,15 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="h-100" data-simplebar>
 
     <!-- User box -->
     <div class="user-box text-center">
 
-        <img src="../../assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+        <img src="<c:url value="/resources/assets/images/users/user-1.jpg"/>" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
         <div class="dropdown">
-            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">Nowak Helme</a>
+            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">${currentUser.name}</a>
             <div class="dropdown-menu user-pro-dropdown">
 
                 <!-- item-->
@@ -76,99 +77,67 @@
             </li>
 
             <li class="menu-title mt-2">Apps</li>
+                <c:choose>
+                    <c:when test="${role == 'ROLE_ADMIN' || role == 'ROLE_TEACHER'}">
+                    <li>
+                        <a href="/FE_ExamApplication/class.htm">
+                            <i class="mdi mdi-calendar-blank-outline"></i>
+                            <span> Class </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FE_ExamApplication/user.htm">
+                            <i class="mdi mdi-account-multiple-plus-outline"></i>
+                            <span> User </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FE_ExamApplication/subject.htm">
+                            <i class="mdi mdi-file-multiple-outline"></i>
+                            <span> Subject </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FE_ExamApplication/level-point.htm">
+                            <i class="mdi mdi-layers-outline"></i>
+                            <span> Level point </span>
+                        </a>
+                    </li>
 
-            <li>
-                <a href="/FE_ExamApplication/class.htm">
-                    <i class="mdi mdi-calendar-blank-outline"></i>
-                    <span> Class </span>
-                </a>
-            </li>
+                    <li>
+                        <a href="/FE_ExamApplication/question.htm">
+                            <i class="mdi mdi-book-open-page-variant-outline"></i>
+                            <span> Question </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FE_ExamApplication/exam.htm">
+                            <i class="mdi mdi-map-outline"></i>
+                            <span> Exam </span>
+                        </a>
+                    </li>
 
+                    <li>
+                        <a href="/FE_ExamApplication/contest.htm">
+                            <i class="mdi mdi-table"></i>
+                            <span> Contest </span>
+                        </a>
+                    </li>
+                </c:when>    
+                <c:when test="${role == 'ROLE_USER'}">
+                    <li>
+                        <a href="/FE_ExamApplication/examstudent.htm">
+                            <i class="mdi mdi-texture"></i>
+                            <span> Exam Student </span>
+                        </a>
+                    </li>
+                </c:when>  
+            </c:choose>
             <li>
-                <a href="/FE_ExamApplication/user.htm">
-                    <i class="mdi mdi-account-multiple-plus-outline"></i>
-                    <span> User </span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/FE_ExamApplication/subject.htm">
-                    <i class="mdi mdi-file-multiple-outline"></i>
-                    <span> Subject </span>
-                </a>
-            </li>
-            <li>
-                <a href="/FE_ExamApplication/level-point.htm">
-                    <i class="mdi mdi-layers-outline"></i>
-                    <span> Level point </span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/FE_ExamApplication/question.htm">
-                    <i class="mdi mdi-book-open-page-variant-outline"></i>
-                    <span> Question </span>
-                </a>
-            </li>
-             <li>
-                <a href="/FE_ExamApplication/exam.htm">
-                    <i class="mdi mdi-map-outline"></i>
-                    <span> Exam </span>
-                </a>
-            </li>
-            
-
-            <li>
-                <a href="/FE_ExamApplication/contest.htm">
-                    <i class="mdi mdi-table"></i>
-                    <span> Contest </span>
-                </a>
-            </li>
-            <li>
-                <a href="/FE_ExamApplication/examstudent.htm">
-                    <i class="mdi mdi-texture"></i>
-                    <span> Exam Student </span>
-                </a>
-            </li>
-           <li>
                 <a href="/FE_ExamApplication/report.htm">
                     <i class="mdi mdi-shield-outline"></i>
                     <span> Report </span>
                 </a>
-            </li>
-            <li>
-                <a href="#email" data-bs-toggle="collapse">
-                    <i class="mdi mdi-email-outline"></i>
-                    <span> Email </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="email">
-                    <ul class="nav-second-level">
-                        <li>
-                            <a href="email-inbox.html">Inbox</a>
-                        </li>
-                        <li>
-                            <a href="email-templates.html">Email Templates</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a href="#email" data-bs-toggle="collapse">
-                    <i class="mdi mdi-email-outline"></i>
-                    <span> Email 22</span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="email">
-                    <ul class="nav-second-level">
-                        <li>
-                            <a href="email-inbox.html">Inbox</a>
-                        </li>
-                        <li>
-                            <a href="email-templates.html">Email Templates</a>
-                        </li>
-                    </ul>
-                </div>
             </li>
         </ul>
 
