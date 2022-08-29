@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/CodeData/BKAP/Java/FE_App/FE_Apps/web/WEB-INF/jsp/Views/Exam/add.jsp</file>
+            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/UserController.java</file>
+            <file>file:/D:/Project/FE_ExamApplication/web/resources/assets/js/myScript.js</file>
+            <file>file:/D:/Project/FE_ExamApplication/src/java/controller/BaseController.java</file>
+            <file>file:/D:/Project/FE_ExamApplication/web/WEB-INF/jsp/Views/User/index.jsp</file>
         </group>
     </open-files>
 </project-private>
