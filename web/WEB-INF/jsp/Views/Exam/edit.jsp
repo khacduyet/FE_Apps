@@ -8,13 +8,18 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<style>
+    .error {
+        color: red; font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <h3 class="header-title">Input information Question</h3>
 
-                <f:form action="edit.htm" method="POST" commandName="c" >
+                <f:form action="edit.htm" method="POST" commandName="c" onsubmit="return Validate()">
                     <div class="row">
                         <div class="col-lg-12">
                             <h2>Information Exam - Subject: ${subject.name}</h2>
@@ -25,7 +30,8 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Content</label>
-                                <f:input path="content" type="text"  cssClass="form-control" placeholder="Name" />
+                                <f:input id="content" path="content" type="text"  cssClass="form-control" placeholder="Name" />
+                                <p id="errcontent" class="error" value=""></p>
                             </div>
 
                             <div class="mb-3">
@@ -35,7 +41,8 @@
 
                             <div class="mb-3">
                                 <label for="note" class="form-label">Timer (minute)</label>
-                                <f:input path="timer" type="number" cssClass="form-control"/>
+                                <f:input id="timer" path="timer" type="number" cssClass="form-control"/>
+                                <p id="errtimer" class="error" value=""></p>
                             </div>
 
                             <div class="mb-3">
@@ -52,8 +59,9 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label for="total" class="form-label">Total Point</label>
-                                        <input value="0" id="totalPoint" type="text" Class="form-control" readonly=""/>
+                                        <label for="total" class="form-label">Total Point (Will increase when adding questions to the topic set)</label>
+                                        <input id="totalPoint" value="0" id="totalPoint" type="text" Class="form-control" readonly=""/>
+                                        <p id="errtotalPoint" class="error" value=""></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -84,7 +92,32 @@
                 <!-- end row-->
             </f:form>
 
-            </div> <!-- end card-body -->
-        </div> <!-- end card -->
-    </div><!-- end col -->
-</div>
+        </div> <!-- end card-body -->
+    </div> <!-- end card -->
+</div><!-- end col -->
+<script>
+    function Validate() {
+        var content = $('#content').val();
+        var timer = $('#timer').val();
+        var totalPoint = $('#totalPoint').val();
+        if (content == '') {
+            $('#errcontent').html('Content is not null!');
+            return false
+        } else {
+            $('#errcontent').html('');
+        }
+        if (timer == '') {
+            $('#errtimer').html('Timer is not null!');
+            return false
+        } else {
+            $('#errtimer').html('');
+        }
+        if (totalPoint == 0) {
+            $('#errtotalPoint').html('TotalPoint greater than 0! Please add a question.');
+            return false
+        } else {
+            $('#errtotalPoint').html('');
+        }
+        return true;
+    }
+</script>
