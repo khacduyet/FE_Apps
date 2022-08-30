@@ -77,8 +77,10 @@
 
                 <!--Scripts-->
             <jsp:include page="Layouts/scripts.jsp"></jsp:include>
+            </div>
 
+            <div id="_loading_back"  style="width: 100%; height: 100%; backdrop-filter: blur(5px); position: absolute; top: 0; left: 0; z-index: 10"></div>
+            <img id="_loading_front"  src="<c:url value="/resources/assets/images/loading_tree.gif"/>" style="z-index: 999;position: fixed;top: 20%; left: 40%;" />
     </body>
-
     <!-- Mirrored from coderthemes.com/adminto/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Aug 2022 14:53:14 GMT -->
 </html>
