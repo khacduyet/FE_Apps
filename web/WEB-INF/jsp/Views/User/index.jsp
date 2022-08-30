@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,8 +46,15 @@
                                         <td>${c.email}</td>
                                         <td>${c.age}</td>
                                         <td>${c.village}</td>
-                                        <td>${c.dob}</td>
-                                        <td>${c.isActive}</td>
+
+                                        <td>
+                                            <fmt:parseDate value="${c.dob}" pattern="yyyy-MM-dd HH:mm" var="myDate"/>
+                                            <fmt:formatDate value="${myDate}" pattern="dd-MM-yyyy"/>
+                                        </td>
+
+                                        <td>
+                                            ${c.isActive ? 'Show' : 'Hidden'}
+                                        </td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-info _assign" data-bs-toggle="modal" data-bs-target="#login-modal" data-id="${c.id}">Assign Role</button>
                                             <a href="/FE_ExamApplication/user/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
@@ -88,7 +96,7 @@
                             </div>
                             <div class="mb-3">
                                 <select class="form-select" name="idRole" id="_role">
-                                    
+
                                 </select>
                             </div>
                             <div class="mb-2 text-center">

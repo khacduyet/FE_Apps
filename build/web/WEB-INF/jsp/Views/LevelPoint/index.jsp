@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Default Example</h4>
+                        <h4 class="mt-0 header-title">Level Point Data</h4>
                         <p class="text-muted font-14 mb-3">
                             <a href="level-point/initInsert.htm" class="btn btn-primary">Add New Record</a>
                         </p>
@@ -42,11 +42,13 @@
                                         <td>${c.name}</td>
                                         <td>${c.point}</td>
                                         <td>${c.note}</td>
-                                        <td>${c.status}</td>
+                                        <td>
+                                            ${c.status ? 'Show' : 'Hidden'}
+                                        </td>
                                         <td class="text-center">
-                                        <a href="level-point/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="level-point/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
-                                    </td>
+                                            <a href="level-point/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
+                                            <a href="level-point/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

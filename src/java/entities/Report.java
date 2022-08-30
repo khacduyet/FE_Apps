@@ -19,6 +19,14 @@ public class Report {
         return nameUser;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public void setNameUser(String nameUser) {
         this.nameUser = nameUser;
     }
@@ -56,12 +64,4 @@ public class Report {
         this.idUser = idUser;
     }
 
-    public String getContent() {
-
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

@@ -14,7 +14,7 @@
     <!-- Mirrored from coderthemes.com/adminto/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Aug 2022 14:53:43 GMT -->
     <head>
         <meta charset="utf-8" />
-        <title>Log In | Adminto - Responsive Admin Dashboard Template</title>
+        <title>Log In | Adminto</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -42,8 +42,6 @@
                             <a href="index.html">
                                 <img src="<c:url value="/resources/assets/css/app.min.css"/>assets/images/logo-dark.png" alt="" height="22" class="mx-auto">
                             </a>
-                            <p class="text-muted mt-2 mb-4">Responsive Admin Dashboard</p>
-
                         </div>
                         <div class="card">
                             <div class="card-body p-4">
@@ -78,13 +76,6 @@
                             </div> <!-- end card-body -->
                         </div>
                         <!-- end card -->
-
-                        <div class="row mt-3">
-                            <div class="col-12 text-center">
-                                <p> <a href="pages-recoverpw.html" class="text-muted ms-1"><i class="fa fa-lock me-1"></i>Forgot your password?</a></p>
-                                <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-dark ms-1"><b>Sign Up</b></a></p>
-                            </div> <!-- end col -->
-                        </div>
                         <!-- end row -->
 
                     </div> <!-- end col -->

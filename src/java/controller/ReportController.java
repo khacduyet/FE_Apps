@@ -12,6 +12,8 @@ import entities.ReturnMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import model.CurrentUser;
+import model.JWT;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -31,8 +33,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class ReportController {
+
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
+    JWT jwt = new JWT();
+
     @RequestMapping(value = "/report", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
@@ -58,6 +63,10 @@ public class ReportController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Report/index.jsp");
+        
+         CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -67,14 +76,18 @@ public class ReportController {
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
         }
-        entities.Class cla = new entities.Class();
+        entities.Report cla = new entities.Report();
         m.addAttribute("VIEW", "Views/Report/add.jsp");
         m.addAttribute("c", cla);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
     @RequestMapping(value = "/report/insert", method = RequestMethod.POST)
-    public String postForm(Model m, entities.Class c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
+    public String postForm(Model m, entities.Report c, HttpServletRequest req, RedirectAttributes redirectAttrs) {
         String auth = CheckLogin(req);
         if (auth.isEmpty()) {
             return "redirect:/login.htm";
@@ -119,6 +132,10 @@ public class ReportController {
         cla = g.fromJson(json, cla.getClass());
         m.addAttribute("c", cla);
         m.addAttribute("VIEW", "Views/Report/edit.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 
@@ -139,7 +156,7 @@ public class ReportController {
         String Url = baseUrl + "report";
         RestTemplate rt = new RestTemplate();
         rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        String data = rt.postForObject(Url, entity, String.class);  
+        String data = rt.postForObject(Url, entity, String.class);
 
         ReturnMessage rmsg = g.fromJson(data, ReturnMessage.class);
         String msg = rmsg.message;

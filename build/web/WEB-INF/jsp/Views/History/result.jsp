@@ -159,7 +159,7 @@
                                 <td><a href="/FE_ExamApplication/history.htm" class="btn-primary" itemprop="url"
                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #6658dd; margin: 0; border-color: #6658dd; border-style: solid; border-width: 8px 16px;">
                                         OKE</a>
-                                    <a href="#" class="btn-primary" itemprop="url"
+                                    <a href="/FE_ExamApplication/report/initInsert.htm" class="btn-primary" itemprop="url"
                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #6658dd; margin: 0; border-color: #6658dd; border-style: solid; border-width: 8px 16px;">
                                         COMPLAIN</a></td>
                             </tr>

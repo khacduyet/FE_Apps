@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,8 +17,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-                        <h4 class="mt-0 header-title">Contest Data</h4>
+                    <div class="card-body"m pha
+                         <h4 class="mt-0 header-title">Contest Data</h4>
                         <p class="text-muted font-14 mb-3">
                             <a href="contest/initInsert.htm" class="btn btn-primary">Add New Contest</a>
                         </p>
@@ -41,17 +42,22 @@
                                     <tr class="text-center">
                                         <th scope="row">${loop.count}</th>
                                         <td>${c.className}</td>
-                                        <td>${c.testDate}</td>
-                                        <td>${c.testTime}</td>
-                                        <td>${c.subjectName}</td>
-                                        <td>${c.status}</td>
-                                        <td class="text-center">
-                                        <a href="contest/detail.htm?id=${c.id}" class="btn btn-primary" style="margin-right: 20px"> Details </a>
-                                        <a href="contest/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="contest/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                        <td>
+                                          <fmt:parseDate value="${c.testDate}" pattern="yyyy-MM-dd HH:mm" var="myDate"/>
+                                         <fmt:formatDate value="${myDate}" pattern="dd-MM-yyyy"/>
                                     </td>
-                                    </tr>
-                                </c:forEach>
+                                    <td>${c.testTime}</td>
+                                   <td>${c.subjectName}</td>
+                                    <td>
+                                      ${c.status ? 'Show' : 'Hidden'}
+                                   </td>
+                                <td class="text-center">
+                                    <a href="contest/detail.htm?id=${c.id}" class="btn btn-primary" style="margin-right: 20px"> Details </a>
+                                    <a href="contest/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
+                                    <a href="contest/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>

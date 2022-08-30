@@ -253,6 +253,10 @@ public class ExamController {
 
         m.addAttribute("VIEW", "Views/Exam/details.jsp");
         m.addAttribute("c", exam);
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 

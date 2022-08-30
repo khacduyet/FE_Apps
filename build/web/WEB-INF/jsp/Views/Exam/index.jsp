@@ -43,9 +43,11 @@
                                         <th scope="row">${loop.count}</th>
                                         <td>${c.content}</td>
                                         <td>${c.note}</td>
-                                        <td>${c.status}</td>
+                                        <td>
+                                            ${c.status ? 'Show' : 'Hidden'}
+                                        </td>
                                         <td class="text-center">
-                                             <a href="exam/detais.htm?id=${c.id}" class="btn btn-primary" style="margin-right: 20px"> Show Details </a>
+                                            <a href="exam/detais.htm?id=${c.id}" class="btn btn-primary" style="margin-right: 20px"> Show Details </a>
                                             <a href="exam/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
                                             <a href="exam/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
                                         </td>

@@ -236,6 +236,10 @@ public class ContestController {
         m.addAttribute("subs", subs);
 
         m.addAttribute("VIEW", "Views/Contest/detail.jsp");
+        
+        CurrentUser cu = jwt.getUserFromToken(auth);
+        m.addAttribute("currentUser", cu);
+        m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
 

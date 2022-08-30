@@ -27,7 +27,9 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Content</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Handle</th>  
+                                        <c:if test="${role == 'ROLE_ADMIN' || role == 'ROLE_TEACHER'}">
+                                        <th scope="col">Handle</th>  
+                                        </c:if>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,10 +39,14 @@
                                         <td>${c.nameUser}</td>
                                         <td>${c.emailUser}</td>
                                         <td>${c.content}</td>
-                                        <td>${c.status}</td>
-                                        <td class="text-center">
-                                            <a href="report/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> View Details </a>
+                                        <td>
+                                            ${c.status ? 'REVIEWED' : 'Processed'}
                                         </td>
+                                        <c:if test="${role == 'ROLE_ADMIN' || role == 'ROLE_TEACHER'}">
+                                            <td class="text-center">
+                                                <a href="report/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> View Details </a>
+                                            </td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                             </tbody>

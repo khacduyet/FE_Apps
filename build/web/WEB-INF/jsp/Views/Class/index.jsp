@@ -44,11 +44,13 @@
                                         <td>${c.note}</td>
                                         <td>${c.course}</td>
                                         <td>${c.schoolYear}</td>
-                                        <td>${c.status}</td>
+                                        <td>
+                                            ${c.status ? 'Show' : 'Hidden'}
+                                        </td>
                                         <td class="text-center">
-                                        <a href="class/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
-                                        <a href="class/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
-                                    </td>
+                                            <a href="class/initEdit.htm?id=${c.id}" class="btn btn-success" style="margin-right: 20px"> Edit </a>
+                                            <a href="class/remove.htm?id=${c.id}" class="btn btn-danger" onclick="return confirm('Are you sure?');"> Delete </a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
