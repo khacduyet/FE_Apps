@@ -48,13 +48,7 @@
 
         <ul class="list-inline">
             <li class="list-inline-item">
-                <a href="#" class="text-muted left-user-info">
-                    <i class="mdi mdi-cog"></i>
-                </a>
-            </li>
-
-            <li class="list-inline-item">
-                <a href="#">
+                <a href="/FE_ExamApplication/logout.htm">
                     <i class="mdi mdi-power"></i>
                 </a>
             </li>
@@ -79,24 +73,33 @@
             <li class="menu-title mt-2">Apps</li>
                 <c:choose>
                     <c:when test="${role == 'ROLE_ADMIN' || role == 'ROLE_TEACHER'}">
-                    <li>
-                        <a href="/FE_ExamApplication/class.htm">
-                            <i class="mdi mdi-calendar-blank-outline"></i>
-                            <span> Class </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/FE_ExamApplication/user.htm">
-                            <i class="mdi mdi-account-multiple-plus-outline"></i>
-                            <span> User </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/FE_ExamApplication/subject.htm">
-                            <i class="mdi mdi-file-multiple-outline"></i>
-                            <span> Subject </span>
-                        </a>
-                    </li>
+                        <c:if test="${role == 'ROLE_ADMIN'}">
+                        <li>
+                            <a href="/FE_ExamApplication/class.htm">
+                                <i class="mdi mdi-calendar-blank-outline"></i>
+                                <span> Class </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/FE_ExamApplication/user.htm">
+                                <i class="mdi mdi-account-multiple-plus-outline"></i>
+                                <span> User </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/FE_ExamApplication/subject.htm">
+                                <i class="mdi mdi-file-multiple-outline"></i>
+                                <span> Subject </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/FE_ExamApplication/contest.htm">
+                                <i class="mdi mdi-table"></i>
+                                <span> Contest </span>
+                            </a>
+                        </li>
+                    </c:if>
+
                     <li>
                         <a href="/FE_ExamApplication/level-point.htm">
                             <i class="mdi mdi-layers-outline"></i>
@@ -117,13 +120,8 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="/FE_ExamApplication/contest.htm">
-                            <i class="mdi mdi-table"></i>
-                            <span> Contest </span>
-                        </a>
-                    </li>
-                </c:when>    
+
+                </c:when>   
                 <c:when test="${role == 'ROLE_USER'}">
                     <li>
                         <a href="/FE_ExamApplication/examstudent.htm">
@@ -135,7 +133,7 @@
             </c:choose>
             <li>
                 <a href="/FE_ExamApplication/history.htm">
-                    <i class="mdi mdi-shield-outline"></i>
+                    <i class="mdi mdi-book-open-page-variant-outline"></i>
                     <span> History Exam </span>
                 </a>
             </li>
