@@ -7,33 +7,40 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<style>
+    .error {
+        color: red; font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="header-title">Input information class</h3>
+                <h3 class="header-title">Input information contest</h3>
 
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-6">
-                        <f:form action="edit.htm" method="POST" commandName="c" >
+                        <f:form action="edit.htm" method="POST" commandName="c" onsubmit="return Validate()">
                             <div class="mb-3" hidden="">
                                 <label class="form-label">Id</label>
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Class Name</label>
-                                <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
+                                <label class="form-label">Contest Name</label>
+                               <f:input id="className" path="className" type="text"  cssClass="form-control" placeholder="Class name" />
+                                <p id="errclassName" class="error" value=""></p>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Test Date</label>
-                                <f:input path="testDate" type="date"  cssClass="form-control" placeholder="Test Date.." />
+                                <input id="testDate" name="testDate" type="date" value="${testDate}"  class="form-control" placeholder="Test Date.." />
+                                <p id="errtestDate" class="error" value=""></p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Test Time (minute)</label>
-                                <f:input path="testTime" type="number"  cssClass="form-control" placeholder="Test time.." />
+                                <f:input id="testTime" path="testTime" type="number"  cssClass="form-control" placeholder="Test time.." />
+                                <p id="errtestTime" class="error" value=""></p>
                             </div>
 
                             <div class="mb-3">
@@ -82,3 +89,29 @@
         </div> <!-- end card -->
     </div><!-- end col -->
 </div>
+<script>
+    function Validate() {
+        var className = $('#className').val();
+        var testDate = $('#testDate').val();
+        var testTime = $('#testTime').val();
+        if (className == '') {
+            $('#errclassName').html('Class name is not null!');
+            return false
+        } else {
+            $('#errclassName').html('');
+        }
+        if (testDate == '') {
+            $('#errtestDate').html('Test date is not null!');
+            return false
+        } else {
+            $('#errtestDate').html('');
+        }
+        if (testTime == '') {
+            $('#errtestTime').html('Test time is not null!');
+            return false
+        } else {
+            $('#errtestTime').html('');
+        }
+        return true;
+    }
+</script>

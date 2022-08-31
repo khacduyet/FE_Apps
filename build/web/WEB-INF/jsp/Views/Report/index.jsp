@@ -40,7 +40,7 @@
                                         <td>${c.emailUser}</td>
                                         <td>${c.content}</td>
                                         <td>
-                                            ${c.status ? 'REVIEWED' : 'Processed'}
+                                            ${c.status ? 'Processed' : 'Waiting'}
                                         </td>
                                         <c:if test="${role == 'ROLE_ADMIN' || role == 'ROLE_TEACHER'}">
                                             <td class="text-center">

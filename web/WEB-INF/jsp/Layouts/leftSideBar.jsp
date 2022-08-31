@@ -63,7 +63,7 @@
             <li class="menu-title">Navigation</li>
 
             <li>
-                <a href="home.htm">
+                <a href="/FE_ExamApplication/home.htm">
                     <i class="mdi mdi-view-dashboard-outline"></i>
                     <span class="badge bg-success rounded-pill float-end">9+</span>
                     <span> Dashboard </span>

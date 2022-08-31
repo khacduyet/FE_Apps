@@ -12,7 +12,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="header-title">Input information class</h3>
+                <h3 class="header-title">Input information contest</h3>
 
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -23,7 +23,7 @@
                                 <f:input path="id" type="text" cssClass="form-control" placeholder="id" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Class Name</label>
+                                <label class="form-label">Contest Name</label>
                                 <f:input path="className" type="text"  cssClass="form-control" placeholder="Class name" />
                             </div>
 

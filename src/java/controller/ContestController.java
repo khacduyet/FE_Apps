@@ -40,8 +40,7 @@ public class ContestController {
 
     String baseUrl = "http://localhost:8080/ExamApplication/api/";
     String contentType = "text/html; charset=UTF-8";
-        JWT jwt = new JWT();
-
+    JWT jwt = new JWT();
 
     @RequestMapping(value = "/contest", method = RequestMethod.GET)
     public String Index(Model m, HttpServletRequest req, RedirectAttributes redirectAttrs) {
@@ -68,7 +67,7 @@ public class ContestController {
         String msg = (String) m.asMap().get("msg");
         m.addAttribute("msg", msg);
         m.addAttribute("VIEW", "Views/Contest/index.jsp");
-        
+
         CurrentUser cu = jwt.getUserFromToken(auth);
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
@@ -115,7 +114,7 @@ public class ContestController {
         Contest contest = new Contest();
         m.addAttribute("c", contest);
         m.addAttribute("VIEW", "Views/Contest/add.jsp");
-        
+
         CurrentUser cu = jwt.getUserFromToken(auth);
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
@@ -186,15 +185,18 @@ public class ContestController {
         m.addAttribute("exam", exam);
         m.addAttribute("cla", cla);
         m.addAttribute("subs", subs);
-
+        String[] testDate = contest.getTestDate().split(" ");
+        if (testDate.length > 0) {
+            m.addAttribute("testDate", testDate[0]);
+        }
         m.addAttribute("VIEW", "Views/Contest/edit.jsp");
-        
+
         CurrentUser cu = jwt.getUserFromToken(auth);
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
-    
+
     @RequestMapping(value = "/contest/detail", method = RequestMethod.GET)
     public String getedDetail(Model m, @RequestParam(value = "id") String id, HttpServletRequest req) {
         String auth = CheckLogin(req);
@@ -236,13 +238,12 @@ public class ContestController {
         m.addAttribute("subs", subs);
 
         m.addAttribute("VIEW", "Views/Contest/detail.jsp");
-        
+
         CurrentUser cu = jwt.getUserFromToken(auth);
         m.addAttribute("currentUser", cu);
         m.addAttribute("role", cu.getRoles().get(0));
         return "MainPages";
     }
-
 
     @RequestMapping(value = "/contest/edit", method = RequestMethod.POST)
     public String postedForm(Model m, Contest c, HttpServletRequest req, RedirectAttributes redirectAttrs) {

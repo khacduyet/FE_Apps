@@ -27,7 +27,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col">#</th>
-                                    <th scope="col">Class Name</th>
+                                    <th scope="col">Contest Name</th>
                                     <th scope="col">Test Date</th>
                                     <th scope="col">Test Time</th>
                                     <th scope="col">Subject</th>
